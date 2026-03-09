@@ -14,11 +14,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Projexia - Project Management for Modern Agencies",
+  title: {
+    template: "%s | Projexia",
+    default: "Projexia – Project Management for Modern Agencies",
+  },
   description:
     "Manage projects, collaborate with clients, and deliver results faster. The all-in-one platform built for agencies that move fast.",
   openGraph: {
-    title: "Projexia - Project Management for Modern Agencies",
+    title: "Projexia – Project Management for Modern Agencies",
     description:
       "Manage projects, collaborate with clients, and deliver results faster.",
     url: "https://projexia.in",
@@ -27,7 +30,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Projexia - Project Management for Modern Agencies",
+    title: "Projexia – Project Management for Modern Agencies",
     description:
       "Manage projects, collaborate with clients, and deliver results faster.",
   },
