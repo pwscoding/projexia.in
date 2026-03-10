@@ -1,20 +1,20 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 const footerLinks = {
   Product: [
-    { label: "Features", href: "#features" },
-    { label: "Pricing", href: "#pricing" },
-    { label: "Integrations", href: "#" },
-    { label: "Status", href: "#" },
+    { label: "Features", href: "/features" },
+    { label: "Pricing", href: "/pricing" },
+    { label: "Documentation", href: "https://docs.projexia.in" },
     { label: "Changelog", href: "#" },
   ],
   Company: [
-    { label: "About", href: "#" },
-    { label: "Blog", href: "#" },
+    { label: "About", href: "/about" },
+    { label: "Contact", href: "/contact" },
     { label: "Careers", href: "#" },
-    { label: "Contact", href: "#" },
+    { label: "Blog", href: "#" },
   ],
   Legal: [
     { label: "Privacy Policy", href: "#" },
@@ -51,20 +51,25 @@ export function Footer() {
   const [email, setEmail] = useState("");
 
   return (
-    <footer className="border-t border-border py-16 px-4">
+    <footer className="border-t border-border py-16 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="mx-auto max-w-7xl">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 md:gap-8">
           {/* Brand + Newsletter */}
           <div className="col-span-2">
-            <span className="text-xl font-bold gradient-text">Projexia</span>
+            <Link href="/" className="flex items-center gap-2">
+              <div className="size-7 rounded-lg bg-primary flex items-center justify-center">
+                <span className="text-xs font-bold text-white">P</span>
+              </div>
+              <span className="text-lg font-bold text-foreground">Projexia</span>
+            </Link>
             <p className="mt-3 text-sm text-muted-foreground max-w-xs">
               The all-in-one project management platform built for modern
-              agencies.
+              agencies. Made with love for teams that deliver.
             </p>
 
             {/* Newsletter */}
             <div className="mt-6">
-              <p className="text-sm font-medium mb-2">Stay in the loop</p>
+              <p className="text-sm font-medium text-foreground mb-2">Stay in the loop</p>
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
@@ -77,12 +82,12 @@ export function Footer() {
                   placeholder="you@agency.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="flex-1 h-9 rounded-md border border-border bg-background/50 px-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring"
+                  className="flex-1 h-9 rounded-md border border-border bg-white px-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
                   required
                 />
                 <button
                   type="submit"
-                  className="h-9 rounded-md bg-indigo px-4 text-sm font-medium text-white hover:bg-indigo/90 transition-colors"
+                  className="h-9 rounded-md bg-primary px-4 text-sm font-medium text-white hover:bg-primary/90 transition-colors"
                 >
                   Subscribe
                 </button>
@@ -91,25 +96,13 @@ export function Footer() {
 
             {/* Social links */}
             <div className="mt-6 flex gap-4">
-              <a
-                href="#"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="Twitter"
-              >
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors" aria-label="Twitter">
                 <TwitterIcon />
               </a>
-              <a
-                href="#"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="LinkedIn"
-              >
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors" aria-label="LinkedIn">
                 <LinkedInIcon />
               </a>
-              <a
-                href="#"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="GitHub"
-              >
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors" aria-label="GitHub">
                 <GitHubIcon />
               </a>
             </div>
@@ -118,16 +111,25 @@ export function Footer() {
           {/* Link columns */}
           {Object.entries(footerLinks).map(([title, links]) => (
             <div key={title}>
-              <h4 className="text-sm font-semibold mb-4">{title}</h4>
+              <h4 className="text-sm font-semibold text-foreground mb-4">{title}</h4>
               <ul className="space-y-2">
                 {links.map((link) => (
                   <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      {link.label}
-                    </a>
+                    {link.href.startsWith("/") ? (
+                      <Link
+                        href={link.href}
+                        className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        {link.label}
+                      </Link>
+                    ) : (
+                      <a
+                        href={link.href}
+                        className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        {link.label}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>

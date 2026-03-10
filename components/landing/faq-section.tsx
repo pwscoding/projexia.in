@@ -4,37 +4,63 @@ import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
-const faqs = [
+const generalFaqs = [
   {
     question: "How do I get started with Projexia?",
-    answer:
-      "Simply create a free account, set up your workspace, invite your team, and you're ready to go. The onboarding wizard will guide you through the entire process in under two minutes.",
+    answer: "Simply create a free account, set up your workspace, invite your team, and you're ready to go. The onboarding wizard will guide you through the entire process in under two minutes.",
   },
   {
     question: "Does Projexia include a client portal?",
-    answer:
-      "Yes! Every plan includes a dedicated client portal where your clients can view project progress, leave feedback, approve deliverables, and communicate with your team — all without needing a full account.",
+    answer: "Yes! Every plan includes a dedicated client portal where your clients can view project progress, leave feedback, approve deliverables, and communicate with your team — all without needing a full account.",
   },
   {
     question: "How secure is my data on Projexia?",
-    answer:
-      "We take security seriously. All data is encrypted at rest (AES-256) and in transit (TLS 1.3). We follow SOC 2 practices, conduct regular security audits, and our infrastructure is hosted on enterprise-grade cloud providers with 99.9% uptime SLA.",
+    answer: "We take security seriously. All data is encrypted in transit (TLS). We use JWT-based authentication with auto token refresh, role-based access control, and multi-tenant organization isolation.",
   },
   {
     question: "Can I migrate from another project management tool?",
-    answer:
-      "Absolutely. We offer import support for popular tools like Jira, Asana, Trello, and Monday.com. Our team can also assist with custom migrations for Enterprise plan customers.",
+    answer: "We're working on import tools. In the meantime, our team can help you get set up quickly. Reach out to us and we'll help with your transition.",
   },
   {
     question: "What are the limits on each plan?",
-    answer:
-      "Each plan has different limits for team members, projects, and storage. The Starter plan is free with generous limits for small teams. Professional and Enterprise plans offer higher or unlimited quotas. Check our pricing section for details.",
+    answer: "Each plan has different limits for team members, projects, and storage. The Starter plan is free with generous limits for small teams. Professional and Enterprise plans offer higher or unlimited quotas. Check our pricing page for details.",
   },
   {
     question: "What is your refund policy?",
-    answer:
-      "We offer a 14-day money-back guarantee on all paid plans. If you're not satisfied within the first 14 days, contact our support team for a full refund — no questions asked.",
+    answer: "We offer a 14-day money-back guarantee on all paid plans. If you're not satisfied within the first 14 days, contact our support team for a full refund — no questions asked.",
+  },
+];
+
+const pricingFaqs = [
+  {
+    question: "What happens when my free trial ends?",
+    answer: "Your account automatically switches to the free Starter plan. You won't lose any data. You can upgrade anytime to unlock premium features.",
+  },
+  {
+    question: "Can I switch plans later?",
+    answer: "Yes! You can upgrade or downgrade your plan at any time. When upgrading, you'll be charged the prorated difference. When downgrading, the credit is applied to your next billing cycle.",
+  },
+  {
+    question: "How does annual billing work?",
+    answer: "Annual billing saves you 20% compared to monthly. You're billed once per year. If you cancel mid-year, you'll have access until the end of your billing period.",
+  },
+  {
+    question: "Do you offer discounts for non-profits or startups?",
+    answer: "Reach out to us — we're happy to work something out for registered non-profits and early-stage startups.",
+  },
+  {
+    question: "What payment methods do you accept?",
+    answer: "We accept all major credit/debit cards and UPI via Razorpay.",
+  },
+  {
+    question: "Is there a setup fee?",
+    answer: "No setup fees, ever. All plans include free onboarding.",
+  },
+  {
+    question: "What is your refund policy?",
+    answer: "We offer a 14-day money-back guarantee on all paid plans. If you're not satisfied within the first 14 days, contact our support team for a full refund — no questions asked.",
   },
 ];
 
@@ -43,7 +69,7 @@ function FAQItem({
   isOpen,
   onToggle,
 }: {
-  faq: (typeof faqs)[0];
+  faq: { question: string; answer: string };
   isOpen: boolean;
   onToggle: () => void;
 }) {
@@ -53,7 +79,7 @@ function FAQItem({
         onClick={onToggle}
         className="flex w-full items-center justify-between py-5 text-left"
       >
-        <span className="text-sm font-medium pr-4">{faq.question}</span>
+        <span className="text-sm font-medium text-foreground pr-4">{faq.question}</span>
         <ChevronDown
           className={cn(
             "size-4 shrink-0 text-muted-foreground transition-transform duration-200",
@@ -80,36 +106,38 @@ function FAQItem({
   );
 }
 
-export function FAQSection() {
+export function FAQSection({ variant = "general" }: { variant?: "general" | "pricing" }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
+  const faqs = variant === "pricing" ? pricingFaqs : generalFaqs;
+
   return (
-    <section id="faq" ref={ref} className="relative py-24 px-4">
+    <section id="faq" ref={ref} className="section-padding">
       <div className="mx-auto max-w-3xl">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          className="section-header"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold">
-            Frequently Asked{" "}
-            <span className="gradient-text">Questions</span>
+          <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">
+            FAQ
+          </p>
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
+            {variant === "pricing" ? "Have questions? We have answers." : "Frequently asked questions"}
           </h2>
-          <p className="mt-4 text-muted-foreground">
+          <p className="mt-4 text-muted-foreground text-lg">
             Everything you need to know about Projexia.
           </p>
         </motion.div>
 
-        {/* Accordion */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="glass rounded-xl px-6"
+          className="rounded-xl border border-border bg-white px-6"
         >
           {faqs.map((faq, i) => (
             <FAQItem
@@ -119,6 +147,18 @@ export function FAQSection() {
               onToggle={() => setOpenIndex(openIndex === i ? null : i)}
             />
           ))}
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="mt-8 text-center text-sm text-muted-foreground"
+        >
+          Still have questions?{" "}
+          <Link href="/contact" className="font-semibold text-primary hover:underline">
+            Talk to our team
+          </Link>
         </motion.div>
       </div>
     </section>

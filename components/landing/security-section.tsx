@@ -5,26 +5,10 @@ import { motion, useInView } from "framer-motion";
 import { Shield, Lock, FileCheck, Server } from "lucide-react";
 
 const badges = [
-  {
-    icon: Shield,
-    title: "SOC 2 Compliant",
-    description: "Rigorous security controls verified by independent auditors.",
-  },
-  {
-    icon: Lock,
-    title: "AES-256 Encryption",
-    description: "All data encrypted at rest and in transit with industry standards.",
-  },
-  {
-    icon: FileCheck,
-    title: "GDPR Ready",
-    description: "Full compliance with data protection regulations for EU customers.",
-  },
-  {
-    icon: Server,
-    title: "99.9% Uptime SLA",
-    description: "Enterprise-grade infrastructure with guaranteed availability.",
-  },
+  { icon: Shield, title: "Role-Based Access", description: "5-tier permission system across all portals." },
+  { icon: Lock, title: "JWT Authentication", description: "Dual-token auth with auto refresh." },
+  { icon: FileCheck, title: "Multi-Tenant", description: "Complete organization data isolation." },
+  { icon: Server, title: "Audit Logs", description: "Track every action across your workspace." },
 ];
 
 export function SecuritySection() {
@@ -32,41 +16,36 @@ export function SecuritySection() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="relative py-24 px-4">
+    <section ref={ref} className="section-padding">
       <div className="mx-auto max-w-5xl">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="section-header"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold">
-            Security &{" "}
-            <span className="gradient-text">Compliance</span>
-          </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">
-            Your data is protected by enterprise-grade security at every layer.
+          <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">
+            Security
           </p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
+            Enterprise-grade security
+          </h2>
         </motion.div>
 
-        {/* Trust badges grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {badges.map((badge, i) => (
             <motion.div
               key={badge.title}
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="glass rounded-xl p-6 text-center"
+              transition={{ duration: 0.4, delay: i * 0.08 }}
+              className="rounded-xl border border-border bg-white p-5 text-center"
             >
-              <div className="mx-auto mb-4 inline-flex items-center justify-center size-12 rounded-lg bg-indigo/10 text-indigo">
-                <badge.icon className="size-6" />
+              <div className="mx-auto mb-3 inline-flex items-center justify-center size-10 rounded-lg bg-primary/10 text-primary">
+                <badge.icon className="size-5" />
               </div>
-              <h3 className="text-sm font-semibold mb-1">{badge.title}</h3>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                {badge.description}
-              </p>
+              <h3 className="text-xs font-semibold text-foreground">{badge.title}</h3>
+              <p className="mt-1 text-[11px] text-muted-foreground">{badge.description}</p>
             </motion.div>
           ))}
         </div>

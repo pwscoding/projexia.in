@@ -6,8 +6,8 @@ import { Check, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { apiGet, type Plan } from "@/lib/api";
+import Link from "next/link";
 
-// Feature lists mapped by plan slug (client-side)
 const featuresBySlug: Record<string, string[]> = {
   starter: [
     "Up to 3 projects",
@@ -37,56 +37,32 @@ const featuresBySlug: Record<string, string[]> = {
   ],
 };
 
-// Fallback plans if API is unreachable
 const fallbackPlans: Plan[] = [
   {
-    id: "1",
-    name: "Starter",
-    slug: "starter",
+    id: "1", name: "Starter", slug: "starter",
     description: "Perfect for freelancers and small teams getting started.",
-    maxUsers: 2,
-    maxProjects: 3,
-    storageLimitBytes: "1073741824",
-    priceMonthly: 0,
-    priceAnnual: 0,
-    currency: "INR",
-    sortOrder: 0,
+    maxUsers: 2, maxProjects: 3, storageLimitBytes: "1073741824",
+    priceMonthly: 0, priceAnnual: 0, currency: "INR", sortOrder: 0,
   },
   {
-    id: "2",
-    name: "Professional",
-    slug: "professional",
+    id: "2", name: "Professional", slug: "professional",
     description: "For growing agencies that need more power and flexibility.",
-    maxUsers: 15,
-    maxProjects: 999,
-    storageLimitBytes: "10737418240",
-    priceMonthly: 2499,
-    priceAnnual: 23990,
-    currency: "INR",
-    sortOrder: 1,
+    maxUsers: 15, maxProjects: 999, storageLimitBytes: "10737418240",
+    priceMonthly: 2499, priceAnnual: 23990, currency: "INR", sortOrder: 1,
   },
   {
-    id: "3",
-    name: "Enterprise",
-    slug: "enterprise",
+    id: "3", name: "Enterprise", slug: "enterprise",
     description: "For large agencies with advanced needs and custom workflows.",
-    maxUsers: 999,
-    maxProjects: 999,
-    storageLimitBytes: "0",
-    priceMonthly: 7999,
-    priceAnnual: 76790,
-    currency: "INR",
-    sortOrder: 2,
+    maxUsers: 999, maxProjects: 999, storageLimitBytes: "0",
+    priceMonthly: 7999, priceAnnual: 76790, currency: "INR", sortOrder: 2,
   },
 ];
 
 function formatPrice(amount: number): string {
   if (amount === 0) return "Free";
   return new Intl.NumberFormat("en-IN", {
-    style: "currency",
-    currency: "INR",
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
+    style: "currency", currency: "INR",
+    minimumFractionDigits: 0, maximumFractionDigits: 0,
   }).format(amount);
 }
 
@@ -103,9 +79,7 @@ export function PricingSection() {
         if (res.success && "data" in res && Array.isArray(res.data)) {
           setPlans(res.data);
         }
-      } catch {
-        // Keep fallback plans
-      }
+      } catch { /* Keep fallback */ }
     }
     fetchPlans();
   }, []);
@@ -113,66 +87,53 @@ export function PricingSection() {
   const popularSlug = "professional";
 
   return (
-    <section id="pricing" ref={ref} className="relative py-24 px-4">
+    <section id="pricing" ref={ref} className="pt-36 pb-20 sm:pt-40 sm:pb-28 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          className="section-header"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold">
-            Simple,{" "}
-            <span className="gradient-text">Transparent Pricing</span>
+          <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">
+            Pricing
+          </p>
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
+            Simple, transparent pricing
           </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">
+          <p className="mt-4 max-w-2xl mx-auto text-muted-foreground text-lg">
             Start free and scale as you grow. No hidden fees, cancel anytime.
           </p>
 
-          {/* Monthly / Annual toggle */}
+          {/* Toggle */}
           <div className="mt-8 flex items-center justify-center gap-3">
-            <span
-              className={cn(
-                "text-sm transition-colors",
-                !isAnnual ? "text-foreground font-medium" : "text-muted-foreground"
-              )}
-            >
+            <span className={cn("text-sm transition-colors", !isAnnual ? "text-foreground font-medium" : "text-muted-foreground")}>
               Monthly
             </span>
             <button
               onClick={() => setIsAnnual(!isAnnual)}
               className={cn(
                 "relative inline-flex h-6 w-11 items-center rounded-full transition-colors",
-                isAnnual ? "bg-indigo" : "bg-muted"
+                isAnnual ? "bg-primary" : "bg-border"
               )}
               aria-label="Toggle annual billing"
             >
-              <span
-                className={cn(
-                  "inline-block size-4 rounded-full bg-white transition-transform",
-                  isAnnual ? "translate-x-6" : "translate-x-1"
-                )}
-              />
+              <span className={cn(
+                "inline-block size-4 rounded-full bg-white transition-transform shadow-sm",
+                isAnnual ? "translate-x-6" : "translate-x-1"
+              )} />
             </button>
-            <span
-              className={cn(
-                "text-sm transition-colors",
-                isAnnual ? "text-foreground font-medium" : "text-muted-foreground"
-              )}
-            >
+            <span className={cn("text-sm transition-colors", isAnnual ? "text-foreground font-medium" : "text-muted-foreground")}>
               Annual
             </span>
-            {isAnnual && (
-              <span className="rounded-full bg-green-500/20 px-2.5 py-0.5 text-xs font-medium text-green-400">
-                Save 20%
-              </span>
-            )}
+            <span className="rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-700">
+              Save 20%
+            </span>
           </div>
         </motion.div>
 
         {/* Pricing cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 items-start">
           {plans.map((plan, i) => {
             const isPopular = plan.slug === popularSlug;
             const price = isAnnual ? plan.priceAnnual : plan.priceMonthly;
@@ -183,40 +144,34 @@ export function PricingSection() {
                 key={plan.id}
                 initial={{ opacity: 0, y: 30 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: i * 0.15 }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
                 className={cn(
-                  "relative rounded-xl p-6 flex flex-col",
+                  "relative rounded-xl p-5 sm:p-6 flex flex-col bg-white border",
                   isPopular
-                    ? "glass-strong border-indigo/40 scale-[1.03] md:scale-105 glow"
-                    : "glass"
+                    ? "border-primary shadow-xl shadow-primary/10 md:scale-[1.02] lg:scale-105"
+                    : "border-border"
                 )}
               >
                 {isPopular && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-indigo to-purple px-4 py-1 text-xs font-semibold text-white">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-4 py-1 text-xs font-semibold text-white">
                     Most Popular
                   </span>
                 )}
 
-                <h3 className="text-lg font-semibold">{plan.name}</h3>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  {plan.description}
-                </p>
+                <h3 className="text-lg font-semibold text-foreground">{plan.name}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{plan.description}</p>
 
                 <div className="mt-6 mb-6">
-                  <span className="text-4xl font-bold">
-                    {formatPrice(price)}
-                  </span>
+                  <span className="text-4xl font-bold text-foreground">{formatPrice(price)}</span>
                   {price > 0 && (
-                    <span className="text-muted-foreground">
-                      /{isAnnual ? "yr" : "mo"}
-                    </span>
+                    <span className="text-muted-foreground">/{isAnnual ? "yr" : "mo"}</span>
                   )}
                 </div>
 
                 <ul className="space-y-3 flex-1">
                   {features.map((f) => (
-                    <li key={f} className="flex items-start gap-2 text-sm">
-                      <Check className="size-4 mt-0.5 text-indigo shrink-0" />
+                    <li key={f} className="flex items-start gap-2.5 text-sm">
+                      <Check className="size-4 mt-0.5 text-primary shrink-0" />
                       <span className="text-muted-foreground">{f}</span>
                     </li>
                   ))}
@@ -225,11 +180,11 @@ export function PricingSection() {
                 <Button
                   asChild
                   variant={isPopular ? "default" : "outline"}
-                  className="mt-8 w-full"
+                  className={cn("mt-8 w-full", isPopular && "shadow-lg shadow-primary/25")}
                 >
-                  <a href="#register">
+                  <Link href="/register">
                     {price === 0 ? "Get Started" : "Start Free Trial"}
-                  </a>
+                  </Link>
                 </Button>
               </motion.div>
             );
@@ -240,10 +195,10 @@ export function PricingSection() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5, delay: 0.6 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
           className="mt-10 flex items-center justify-center gap-2 text-sm text-muted-foreground"
         >
-          <Shield className="size-4 text-green-400" />
+          <Shield className="size-4 text-green-600" />
           14-day money-back guarantee on all paid plans
         </motion.div>
       </div>

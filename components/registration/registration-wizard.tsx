@@ -20,7 +20,7 @@ const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://app.projexia.in";
 
 export function RegistrationWizard() {
   const [step, setStep] = useState(0);
-  const [direction, setDirection] = useState(1); // 1 = forward, -1 = backward
+  const [direction, setDirection] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<RegistrationFormData>({
@@ -65,7 +65,6 @@ export function RegistrationWizard() {
 
       if (res.success) {
         toast.success("Account created! Redirecting...");
-        // Store tokens if returned
         if ("accessToken" in res && typeof res.accessToken === "string") {
           document.cookie = `accessToken=${res.accessToken}; path=/; max-age=${7 * 24 * 60 * 60}; SameSite=Lax`;
         }
@@ -114,7 +113,7 @@ export function RegistrationWizard() {
     <div className="w-full max-w-md mx-auto">
       <StepIndicator currentStep={step} totalSteps={3} />
 
-      <div className="glass-strong rounded-xl p-6 sm:p-8 overflow-hidden">
+      <div className="rounded-xl border border-border bg-white p-6 sm:p-8 shadow-lg overflow-hidden">
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
             key={step}
@@ -144,7 +143,7 @@ export function RegistrationWizard() {
           Already have an account?{" "}
           <a
             href={`${APP_URL}/login`}
-            className="text-indigo hover:underline"
+            className="text-primary font-medium hover:underline"
           >
             Sign in
           </a>
