@@ -378,7 +378,7 @@ function TeamMockup() {
   );
 }
 
-const mockupComponents: Record<string, () => JSX.Element> = {
+const mockupComponents: Record<string, () => React.JSX.Element> = {
   agency: AgencyMockup,
   client: ClientMockup,
   team: TeamMockup,
