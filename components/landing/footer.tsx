@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import logo from "@/assets/projexia-logo.png";
 
 const footerLinks = {
   Product: [
@@ -17,9 +18,9 @@ const footerLinks = {
     { label: "Blog", href: "#" },
   ],
   Legal: [
-    { label: "Privacy Policy", href: "#" },
-    { label: "Terms of Service", href: "#" },
-    { label: "Cookie Policy", href: "#" },
+    { label: "Privacy Policy", href: "/privacy" },
+    { label: "Terms of Service", href: "/terms" },
+    { label: "Cookie Policy", href: "/cookies" },
   ],
 };
 
@@ -57,10 +58,7 @@ export function Footer() {
           {/* Brand + Newsletter */}
           <div className="col-span-2">
             <Link href="/" className="flex items-center gap-2">
-              <div className="size-7 rounded-lg bg-primary flex items-center justify-center">
-                <span className="text-xs font-bold text-white">P</span>
-              </div>
-              <span className="text-lg font-bold text-foreground">Projexia</span>
+              <img src={logo.src} alt="Projexia" className="h-7 w-auto" />
             </Link>
             <p className="mt-3 text-sm text-muted-foreground max-w-xs">
               The all-in-one project management platform built for modern

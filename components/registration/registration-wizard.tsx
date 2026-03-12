@@ -110,40 +110,42 @@ export function RegistrationWizard() {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto">
-      <StepIndicator currentStep={step} totalSteps={3} />
+    <div className="w-full">
+      <div className="rounded-xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
+        <StepIndicator currentStep={step} totalSteps={3} />
 
-      <div className="rounded-xl border border-border bg-white p-6 sm:p-8 shadow-lg overflow-hidden">
-        <AnimatePresence mode="wait" custom={direction}>
-          <motion.div
-            key={step}
-            custom={direction}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{ duration: 0.25, ease: "easeInOut" }}
-          >
-            {step === 0 && <StepPersonal form={form} onNext={goNext} />}
-            {step === 1 && (
-              <StepOrganization form={form} onNext={goNext} onBack={goBack} />
-            )}
-            {step === 2 && (
-              <StepPassword
-                form={form}
-                onBack={goBack}
-                onSubmit={handleSubmit}
-                isSubmitting={isSubmitting}
-              />
-            )}
-          </motion.div>
-        </AnimatePresence>
+        <div className="overflow-hidden">
+          <AnimatePresence mode="wait" custom={direction}>
+            <motion.div
+              key={step}
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.25, ease: "easeInOut" }}
+            >
+              {step === 0 && <StepPersonal form={form} onNext={goNext} />}
+              {step === 1 && (
+                <StepOrganization form={form} onNext={goNext} onBack={goBack} />
+              )}
+              {step === 2 && (
+                <StepPassword
+                  form={form}
+                  onBack={goBack}
+                  onSubmit={handleSubmit}
+                  isSubmitting={isSubmitting}
+                />
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
-        <p className="mt-6 text-center text-xs text-muted-foreground">
+        <p className="mt-6 text-center text-[13px] text-slate-400">
           Already have an account?{" "}
           <a
             href={`${APP_URL}/login`}
-            className="text-primary font-medium hover:underline"
+            className="text-slate-600 font-medium hover:text-slate-900 transition-colors"
           >
             Sign in
           </a>
