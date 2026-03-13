@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/landing/page-hero";
 import { ProductShowcase } from "@/components/landing/product-showcase";
-import { IntegrationsSection } from "@/components/landing/integrations-section";
 import { PageCTA } from "@/components/landing/page-cta";
 
 export const metadata: Metadata = {
@@ -19,7 +18,6 @@ export default function FeaturesPage() {
         description="From project kickoff to final invoice — every tool, one platform."
       />
       <ProductShowcase />
-      <IntegrationsSection />
       <PageCTA
         headline="See it in action — start your free account"
         description="Get started in 2 minutes. No credit card required. Free forever plan available."
