@@ -3,44 +3,32 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import {
-  Building2,
-  Users,
+  UserPlus,
   FolderKanban,
-  Rocket,
+  BarChart3,
 } from "lucide-react";
 
 const steps = [
   {
     number: "01",
-    icon: Building2,
-    title: "Create your workspace",
+    icon: UserPlus,
+    title: "Add your client",
     description:
-      "Sign up in under 2 minutes. Set your agency name, upload your logo, pick your brand colors, and you're live. No credit card needed.",
-    detail: "Free forever plan available",
+      "Create a client profile, send a portal invite, and they get instant access to a branded dashboard — all in under a minute.",
   },
   {
     number: "02",
-    icon: Users,
-    title: "Invite your team & clients",
+    icon: FolderKanban,
+    title: "Assign a project",
     description:
-      "Send email invites to team members with role assignments. Add clients and give them portal access with a single click.",
-    detail: "Role-based access control built in",
+      "Set up a project from scratch or use a template. Add tasks, assign team members, set milestones, and share it with the client.",
   },
   {
     number: "03",
-    icon: FolderKanban,
-    title: "Manage projects & track time",
+    icon: BarChart3,
+    title: "Track progress",
     description:
-      "Create projects from scratch or templates. Assign tasks, track milestones, log time, and share updates with clients automatically.",
-    detail: "Kanban, Gantt, list & table views",
-  },
-  {
-    number: "04",
-    icon: Rocket,
-    title: "Invoice, report, repeat",
-    description:
-      "Generate invoices from tracked time, accept payments online, send reports to clients, and scale your agency with confidence.",
-    detail: "Razorpay payments + PDF invoices",
+      "Monitor timelines, log hours, send updates, and invoice — all from one place. Your client sees progress in real time.",
   },
 ];
 
@@ -49,7 +37,7 @@ export function HowItWorks() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="section-padding bg-muted/30">
+    <section ref={ref} className="section-padding">
       <div className="mx-auto max-w-6xl">
         {/* Header */}
         <motion.div
@@ -62,15 +50,15 @@ export function HowItWorks() {
             How it works
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
-            Up and running in minutes, not days
+            Up and running in minutes
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-muted-foreground text-lg">
-            Getting started with Projexia is simple. No complex setup, no migration headaches.
+            Three simple steps to organize your agency.
           </p>
         </motion.div>
 
         {/* Steps */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {steps.map((step, i) => (
             <motion.div
               key={step.number}
@@ -81,14 +69,13 @@ export function HowItWorks() {
             >
               {/* Connector line (desktop) */}
               {i < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-10 left-[calc(100%+0.25rem)] w-[calc(100%-2rem)] h-px">
+                <div className="hidden md:block absolute top-10 left-[calc(100%+0.25rem)] w-[calc(100%-2rem)] h-px">
                   <div className="w-full h-px bg-border" />
                   <div className="absolute right-0 top-1/2 -translate-y-1/2 size-1.5 rounded-full bg-primary/40" />
                 </div>
               )}
 
               <div className="rounded-xl border border-border bg-white p-6 h-full">
-                {/* Step number */}
                 <div className="flex items-center gap-3 mb-4">
                   <div className="size-10 rounded-xl bg-primary/10 flex items-center justify-center">
                     <step.icon className="size-5 text-primary" />
@@ -101,14 +88,9 @@ export function HowItWorks() {
                 <h3 className="text-base font-semibold text-foreground mb-2">
                   {step.title}
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   {step.description}
                 </p>
-
-                {/* Detail badge */}
-                <span className="inline-flex items-center rounded-full bg-primary/5 border border-primary/10 px-3 py-1 text-xs font-medium text-primary">
-                  {step.detail}
-                </span>
               </div>
             </motion.div>
           ))}

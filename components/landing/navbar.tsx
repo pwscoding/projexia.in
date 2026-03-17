@@ -15,14 +15,14 @@ import logo from "@/assets/projexia-logo.png";
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://app.projexia.in";
 
 const features = [
-  { icon: LayoutDashboard, name: "Project Management", desc: "Kanban, Gantt, milestones & templates" },
-  { icon: Globe, name: "Client Portal", desc: "White-label portal with approvals & files" },
-  { icon: Clock, name: "Time Tracking", desc: "Timers, timesheets & approval workflows" },
-  { icon: Receipt, name: "Invoicing", desc: "Auto invoices, payments & retainers" },
-  { icon: Users, name: "Team Management", desc: "Roles, permissions & invite flows" },
-  { icon: MessageSquare, name: "Communication", desc: "Chat rooms, tickets & notifications" },
-  { icon: BarChart3, name: "Reports", desc: "Dashboards, utilization & CSV exports" },
-  { icon: Shield, name: "Security", desc: "Auth, audit logs & session control" },
+  { icon: LayoutDashboard, name: "Project Management", desc: "Kanban, Gantt, milestones & templates", slug: "project-management" },
+  { icon: Globe, name: "Client Portal", desc: "White-label portal with approvals & files", slug: "client-portal" },
+  { icon: Clock, name: "Time Tracking", desc: "Timers, timesheets & approval workflows", slug: "time-tracking" },
+  { icon: Receipt, name: "Invoicing", desc: "Auto invoices, payments & retainers", slug: "invoicing" },
+  { icon: Users, name: "Team Management", desc: "Roles, permissions & invite flows", slug: "team-management" },
+  { icon: MessageSquare, name: "Communication", desc: "Chat rooms, tickets & notifications", slug: "communication" },
+  { icon: BarChart3, name: "Reports", desc: "Dashboards, utilization & CSV exports", slug: "reports" },
+  { icon: Shield, name: "Security", desc: "Auth, audit logs & session control", slug: "security" },
 ];
 
 const resourceLinks = [
@@ -84,7 +84,7 @@ export function Navbar() {
           "transition-all duration-200 border-b",
           scrolled
             ? "bg-white/95 backdrop-blur-md border-slate-200 shadow-[0_1px_3px_rgba(0,0,0,0.04)]"
-            : "bg-white border-slate-200"
+            : "bg-transparent border-transparent"
         )}
       >
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -131,7 +131,7 @@ export function Navbar() {
                     {features.map((f) => (
                       <Link
                         key={f.name}
-                        href="/features"
+                        href={`/features/${f.slug}`}
                         className="flex items-start gap-3 rounded-lg px-3 py-2.5 hover:bg-slate-50 transition-colors group"
                       >
                         <div className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-md bg-indigo-50 text-indigo-600 group-hover:bg-indigo-100 transition-colors">
@@ -295,14 +295,17 @@ export function Navbar() {
           {/* Actions */}
           <div className="flex items-center gap-1">
             <a
-              href={`${APP_URL}/login`}
+              href={`${APP_URL}/sign-in`}
               className="hidden sm:inline-flex px-3 py-1.5 text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors"
             >
               Sign in
             </a>
             <Link
               href="/register"
-              className="inline-flex items-center h-9 px-5 rounded-full bg-indigo-600 text-white text-sm font-semibold shadow-sm shadow-indigo-500/20 hover:bg-indigo-700 transition-colors"
+              className={cn(
+                "inline-flex items-center h-9 px-5 rounded-full bg-indigo-600 text-white text-sm font-semibold shadow-sm shadow-indigo-500/20 hover:bg-indigo-700 transition-all",
+                scrolled && "cta-pulse cta-glow"
+              )}
             >
               Start Free
             </Link>
@@ -358,7 +361,7 @@ export function Navbar() {
               {features.map((f) => (
                 <Link
                   key={f.name}
-                  href="/features"
+                  href={`/features/${f.slug}`}
                   className="flex items-center gap-2.5 text-[13px] py-2 px-3 rounded-md text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-colors"
                 >
                   <f.icon className="size-3.5 text-slate-400" />

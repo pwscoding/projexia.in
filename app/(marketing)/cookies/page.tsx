@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Cookie Policy — Projexia",
+  title: "Cookie Policy",
   description: "Cookie Policy for Projexia — how we use cookies and similar technologies.",
+  alternates: { canonical: "/cookies" },
 };
 
 const lastUpdated = "March 12, 2026";

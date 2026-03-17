@@ -32,10 +32,6 @@ export const registrationSchema = z
       .regex(
         /^[a-zA-Z][a-zA-Z\s.\-']+$/,
         "Name can only contain letters, spaces, hyphens, dots, and apostrophes"
-      )
-      .refine(
-        (val) => val.trim().includes(" "),
-        "Please enter your full name (first and last)"
       ),
     email: z
       .string()

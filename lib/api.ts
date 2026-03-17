@@ -26,6 +26,8 @@ export interface Plan {
   priceAnnual: number;
   currency: string;
   sortOrder: number;
+  features: string[];
+  trialDays: number;
 }
 
 export async function apiGet<T = unknown>(

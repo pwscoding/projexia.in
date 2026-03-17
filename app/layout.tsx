@@ -19,12 +19,14 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://projexia.in"),
   title: {
     template: "%s | Projexia",
     default: "Projexia – Project Management for Modern Agencies",
   },
   description:
     "Manage projects, collaborate with clients, and deliver results faster. The all-in-one platform built for agencies that move fast.",
+  alternates: { canonical: "/" },
   openGraph: {
     title: "Projexia – Project Management for Modern Agencies",
     description:

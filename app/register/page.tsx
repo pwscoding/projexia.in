@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import Link from "next/link";
 import logo from "@/assets/projexia-logo.png";
 import { RegistrationWizard } from "@/components/registration/registration-wizard";
@@ -31,7 +32,9 @@ export default function RegisterPage() {
           </div>
 
           {/* Registration form */}
-          <RegistrationWizard />
+          <Suspense fallback={<div className="h-96 animate-pulse rounded-xl border border-slate-200 bg-white" />}>
+            <RegistrationWizard />
+          </Suspense>
         </div>
       </div>
 

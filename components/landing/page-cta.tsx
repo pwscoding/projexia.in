@@ -51,9 +51,8 @@ export function PageCTA({
             {secondaryLabel && secondaryHref && (
               <Button
                 asChild
-                variant="outline"
                 size="lg"
-                className="h-12 px-8 border-white/20 text-white hover:bg-white/10 hover:text-white"
+                className="h-12 px-8 bg-transparent border border-white/25 text-white hover:bg-white/10"
               >
                 <Link href={secondaryHref}>{secondaryLabel}</Link>
               </Button>

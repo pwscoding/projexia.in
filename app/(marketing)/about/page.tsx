@@ -11,9 +11,10 @@ import { TestimonialsSection } from "@/components/landing/testimonials-section";
 import { PageCTA } from "@/components/landing/page-cta";
 
 export const metadata: Metadata = {
-  title: "About — Projexia",
+  title: "About",
   description:
     "Learn about Projexia — built by agency people, for agency people. Our mission, story, values, and the team behind the platform.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {

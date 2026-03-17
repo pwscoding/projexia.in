@@ -3,185 +3,22 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import {
-  CheckSquare,
   Users,
   Clock,
   MessageSquare,
   BarChart3,
-  Receipt,
-  Globe,
   Shield,
   ArrowRight,
-  Check,
-  Kanban,
-  GanttChart,
-  ListChecks,
-  Milestone,
-  Copy,
-  Activity,
-  Palette,
-  ClipboardCheck,
-  FileText,
-  FolderOpen,
-  Star,
-  Timer,
-  CalendarDays,
-  BadgeCheck,
-  FileDown,
-  CreditCard,
-  Repeat,
-  TrendingUp,
-  UserPlus,
-  KeyRound,
-  Eye,
-  MessagesSquare,
-  TicketIcon,
-  HeadphonesIcon,
-  PieChart,
-  Lock,
-  ScrollText,
-  ServerCog,
-  Settings,
 } from "lucide-react";
 import Link from "next/link";
-
-const features = [
-  {
-    icon: CheckSquare,
-    label: "Project Management",
-    title: "Keep every project on track with powerful tools",
-    description:
-      "Multiple view modes, task assignment, milestone tracking, project templates, and health monitoring — everything you need to deliver on time.",
-    bullets: [
-      { icon: Kanban, text: "Kanban boards with drag-and-drop task management" },
-      { icon: GanttChart, text: "Gantt chart timeline for project scheduling" },
-      { icon: ListChecks, text: "List and table views for quick overview" },
-      { icon: Milestone, text: "Milestone tracking with deadline alerts" },
-      { icon: Copy, text: "Project templates — clone and reuse structures" },
-      { icon: Activity, text: "Real-time project health monitoring (On Track / At Risk / Off Track)" },
-    ],
-    mockupType: "kanban",
-  },
-  {
-    icon: Globe,
-    label: "Client Portal",
-    title: "Give clients their own branded experience",
-    description:
-      "A white-label portal where clients view projects, approve deliverables, pay invoices, upload files, and chat with your team — all under your brand.",
-    bullets: [
-      { icon: Palette, text: "White-label branding — your colors, your logo, your domain" },
-      { icon: ClipboardCheck, text: "One-click approvals with annotations and batch actions" },
-      { icon: Receipt, text: "Online invoice payments via Razorpay with PDF download" },
-      { icon: FolderOpen, text: "File sharing with upload, grid/list view, project filter" },
-      { icon: MessageSquare, text: "Built-in chat rooms and support ticket system" },
-      { icon: Star, text: "Interactive guided tour for first-time client onboarding" },
-    ],
-    mockupType: "portal",
-  },
-  {
-    icon: Clock,
-    label: "Time Tracking",
-    title: "Know where every billable minute goes",
-    description:
-      "Real-time timers, manual entries, daily timesheets, and a manager approval workflow — built into every project.",
-    bullets: [
-      { icon: Timer, text: "One-click start/stop timer on any project" },
-      { icon: CalendarDays, text: "Daily timesheet view with date navigation" },
-      { icon: BadgeCheck, text: "Manager approval workflow — Pending / Approved / Rejected" },
-      { icon: FileDown, text: "Manual time entry with project, start/end time, and notes" },
-      { icon: Activity, text: "Duration formatting with hours and minutes breakdown" },
-      { icon: TrendingUp, text: "Track billable vs non-billable hours" },
-    ],
-    mockupType: "timetracking",
-  },
-  {
-    icon: Receipt,
-    label: "Invoicing & Payments",
-    title: "From tracked hours to paid invoices",
-    description:
-      "Generate invoices, accept online payments through Razorpay, manage retainer billing, and track revenue — all in one workflow.",
-    bullets: [
-      { icon: FileText, text: "Auto-generate professional invoices with line items" },
-      { icon: CreditCard, text: "Razorpay payment gateway with secure webhook verification" },
-      { icon: FileDown, text: "PDF invoice download for clients and your records" },
-      { icon: Repeat, text: "Retainer-based billing for recurring client engagements" },
-      { icon: TrendingUp, text: "Payment tracking — Draft, Sent, Paid, Overdue statuses" },
-      { icon: Activity, text: "Revenue analytics with monthly breakdown" },
-    ],
-    mockupType: "billing",
-  },
-  {
-    icon: Users,
-    label: "Team Management",
-    title: "Build and manage your agency team",
-    description:
-      "Invite members via email, assign granular roles, control permissions, and give your team their own focused portal.",
-    bullets: [
-      { icon: UserPlus, text: "Email-based team invitations with onboarding flow" },
-      { icon: KeyRound, text: "5-tier role system: Owner, Admin, Manager, Member, Viewer" },
-      { icon: Eye, text: "Granular permission control per role" },
-      { icon: Activity, text: "Team member status management (active/inactive)" },
-      { icon: Globe, text: "Dedicated team portal at team.youragency.com" },
-      { icon: CheckSquare, text: "Task assignment and workload distribution" },
-    ],
-    mockupType: "team",
-  },
-  {
-    icon: MessageSquare,
-    label: "Communication",
-    title: "Keep everyone in the loop",
-    description:
-      "Real-time messaging, support tickets with satisfaction ratings, project updates, and email notifications — collaboration built in.",
-    bullets: [
-      { icon: MessagesSquare, text: "Chat rooms with split-panel interface and polling" },
-      { icon: TicketIcon, text: "Support ticket system with priority and status management" },
-      { icon: HeadphonesIcon, text: "Client satisfaction ratings on resolved tickets" },
-      { icon: FileText, text: "Project updates with types: Status, Milestone, Deliverable, General" },
-      { icon: Star, text: "Customizable email notification preferences" },
-      { icon: Activity, text: "Unread message counts and real-time updates" },
-    ],
-    mockupType: "messaging",
-  },
-  {
-    icon: BarChart3,
-    label: "Reports & Analytics",
-    title: "Make data-driven decisions",
-    description:
-      "Project health dashboards, revenue analytics, expense tracking, team utilization, and publishable client reports.",
-    bullets: [
-      { icon: PieChart, text: "Project health dashboard with KPI tracking" },
-      { icon: TrendingUp, text: "Revenue and expense analytics with trends" },
-      { icon: FileText, text: "Custom client reports with rich JSON content renderer" },
-      { icon: Activity, text: "Team utilization and capacity metrics" },
-      { icon: BadgeCheck, text: "Report publishing with client visibility control" },
-      { icon: FileDown, text: "Export reports and analytics data" },
-    ],
-    mockupType: "analytics",
-  },
-  {
-    icon: Shield,
-    label: "Security & Administration",
-    title: "Enterprise-grade security built in",
-    description:
-      "Multi-tenant architecture, JWT authentication, session management, audit logs, and maintenance mode — secure by design.",
-    bullets: [
-      { icon: Lock, text: "JWT dual-token auth (15min access + 30 day refresh)" },
-      { icon: ScrollText, text: "Comprehensive audit logs for every action" },
-      { icon: ServerCog, text: "Maintenance mode with branded downtime page" },
-      { icon: Settings, text: "Multi-tenant organization isolation" },
-      { icon: Eye, text: "Session management — view active sessions, revoke access" },
-      { icon: Shield, text: "Role-based access control across all portals" },
-    ],
-    mockupType: "security",
-  },
-];
+import { featurePages } from "@/lib/features";
 
 function FeatureRow({
   feature,
   index,
   inView,
 }: {
-  feature: (typeof features)[0];
+  feature: (typeof featurePages)[0];
   index: number;
   inView: boolean;
 }) {
@@ -220,12 +57,12 @@ function FeatureRow({
           ))}
         </ul>
 
-        <div className="mt-6">
+        <div className="mt-6 flex items-center gap-4">
           <Link
-            href="/register"
+            href={`/features/${feature.slug}`}
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
           >
-            Try it free
+            Learn more
             <ArrowRight className="size-4" />
           </Link>
         </div>
@@ -456,7 +293,7 @@ export function ProductShowcase() {
   return (
     <section ref={ref} className="section-padding">
       <div className="mx-auto max-w-6xl">
-        {features.map((feature, i) => (
+        {featurePages.map((feature, i) => (
           <FeatureRow key={feature.label} feature={feature} index={i} inView={inView} />
         ))}
       </div>

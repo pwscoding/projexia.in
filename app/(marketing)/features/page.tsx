@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Features",
   description:
     "Explore all Projexia features — project management, client portal, time tracking, team collaboration, analytics, and automations.",
+  alternates: { canonical: "/features" },
 };
 
 export default function FeaturesPage() {

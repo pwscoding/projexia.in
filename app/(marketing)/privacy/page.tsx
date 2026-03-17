@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — Projexia",
+  title: "Privacy Policy",
   description: "Privacy Policy for Projexia — how we collect, use, and protect your data.",
+  alternates: { canonical: "/privacy" },
 };
 
 const lastUpdated = "March 12, 2026";

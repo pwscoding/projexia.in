@@ -1,16 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "sonner";
+import { Check } from "lucide-react";
 import {
   registrationSchema,
   stepFields,
   type RegistrationFormData,
 } from "@/lib/validations";
-import { apiPost } from "@/lib/api";
+import { apiPost, apiGet, type Plan } from "@/lib/api";
 import { StepIndicator } from "./step-indicator";
 import { StepPersonal } from "./step-personal";
 import { StepOrganization } from "./step-organization";
@@ -19,9 +21,27 @@ import { StepPassword } from "./step-password";
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://app.projexia.in";
 
 export function RegistrationWizard() {
+  const searchParams = useSearchParams();
+  const planSlug = searchParams.get("plan");
+  const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
+
   const [step, setStep] = useState(0);
   const [direction, setDirection] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (!planSlug) return;
+    async function fetchPlan() {
+      try {
+        const res = await apiGet<Plan[]>("/plans/public");
+        if (res.success && "data" in res && Array.isArray(res.data)) {
+          const match = res.data.find((p: Plan) => p.slug === planSlug);
+          if (match) setSelectedPlan(match);
+        }
+      } catch { /* silent */ }
+    }
+    fetchPlan();
+  }, [planSlug]);
 
   const form = useForm<RegistrationFormData>({
     resolver: zodResolver(registrationSchema),
@@ -61,17 +81,15 @@ export function RegistrationWizard() {
         email,
         password,
         orgName,
+        ...(planSlug && { planSlug }),
       });
 
       if (res.success) {
         toast.success("Account created! Redirecting...");
-        if ("accessToken" in res && typeof res.accessToken === "string") {
-          document.cookie = `accessToken=${res.accessToken}; path=/; max-age=${7 * 24 * 60 * 60}; SameSite=Lax`;
-        }
-        if ("refreshToken" in res && typeof res.refreshToken === "string") {
-          document.cookie = `refreshToken=${res.refreshToken}; path=/; max-age=${7 * 24 * 60 * 60}; SameSite=Lax`;
-        }
-        window.location.href = `${APP_URL}/onboarding`;
+        const accessToken = "accessToken" in res ? res.accessToken : "";
+        const refreshToken = "refreshToken" in res ? res.refreshToken : "";
+        // Redirect to app with tokens — app will store them and proceed to onboarding
+        window.location.href = `${APP_URL}/auth/callback?accessToken=${encodeURIComponent(String(accessToken))}&refreshToken=${encodeURIComponent(String(refreshToken))}`;
       } else {
         const error = res as { success: false; message: string; errors?: { field: string; message: string }[] };
 
@@ -111,6 +129,25 @@ export function RegistrationWizard() {
 
   return (
     <div className="w-full">
+      {/* Selected plan badge */}
+      {selectedPlan && (
+        <div className="mb-4 flex items-center gap-2 rounded-lg border border-indigo-100 bg-indigo-50/50 px-4 py-3">
+          <Check className="size-4 text-indigo-600 shrink-0" />
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-medium text-slate-900">
+              {selectedPlan.name} plan selected
+            </p>
+            <p className="text-xs text-slate-500">
+              {selectedPlan.priceMonthly === 0
+                ? "Free forever"
+                : selectedPlan.trialDays > 0
+                  ? `${selectedPlan.trialDays}-day free trial included`
+                  : `Starting at ₹${selectedPlan.priceMonthly.toLocaleString("en-IN")}/mo`}
+            </p>
+          </div>
+        </div>
+      )}
+
       <div className="rounded-xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
         <StepIndicator currentStep={step} totalSteps={3} />
 

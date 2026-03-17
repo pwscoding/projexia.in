@@ -3,51 +3,40 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import {
-  Palette,
-  Code2,
-  Megaphone,
-  PenTool,
+  Building2,
+  User,
+  Users,
   ArrowRight,
 } from "lucide-react";
 import Link from "next/link";
 
-const agencyTypes = [
+const personas = [
   {
-    icon: Palette,
-    type: "Design Agencies",
+    icon: Building2,
+    type: "Agencies",
     description:
-      "Share deliverables through branded portals. Get client approvals with annotations. No more email ping-pong over mockups.",
-    features: ["Visual approvals", "File sharing", "Brand portal"],
-    color: "bg-pink-50 border-pink-100",
-    iconColor: "text-pink-600",
-    badgeColor: "bg-pink-50 text-pink-700 border-pink-200",
-  },
-  {
-    icon: Code2,
-    type: "Dev & IT Agencies",
-    description:
-      "Track sprints, log billable hours, and give clients visibility into progress — without sharing your internal tools.",
-    features: ["Time tracking", "Sprint boards", "Client reports"],
+      "Manage multiple clients, track projects across teams, and give every client their own branded portal. Built for design, dev, and marketing agencies.",
+    features: ["Client portals", "Multi-project", "Team roles", "White-label"],
     color: "bg-blue-50 border-blue-100",
     iconColor: "text-blue-600",
     badgeColor: "bg-blue-50 text-blue-700 border-blue-200",
   },
   {
-    icon: Megaphone,
-    type: "Marketing Agencies",
+    icon: User,
+    type: "Freelancers",
     description:
-      "Manage retainers, track campaign hours, share reports with clients, and invoice — all without switching tabs.",
-    features: ["Retainer billing", "Campaign reports", "Auto invoicing"],
+      "Stop chasing clients for approvals and payments. Track your time, send professional invoices, and share progress — all from one dashboard.",
+    features: ["Time tracking", "Invoicing", "File sharing", "Client updates"],
     color: "bg-amber-50 border-amber-100",
     iconColor: "text-amber-600",
     badgeColor: "bg-amber-50 text-amber-700 border-amber-200",
   },
   {
-    icon: PenTool,
-    type: "Creative Studios",
+    icon: Users,
+    type: "Small Teams",
     description:
-      "From concept to delivery — manage multi-phase projects, collect feedback, and keep your creative team aligned.",
-    features: ["Multi-phase projects", "Feedback loops", "Team views"],
+      "Coordinate work across your team without the complexity of enterprise tools. Assign tasks, track hours, and keep clients in the loop.",
+    features: ["Task assignment", "Team portal", "Progress tracking", "Reports"],
     color: "bg-purple-50 border-purple-100",
     iconColor: "text-purple-600",
     badgeColor: "bg-purple-50 text-purple-700 border-purple-200",
@@ -59,7 +48,7 @@ export function BuiltForSection() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="section-padding">
+    <section ref={ref} className="section-padding bg-muted/30">
       <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -68,50 +57,43 @@ export function BuiltForSection() {
           className="section-header"
         >
           <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">
-            Built for your agency
+            Who is it for
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
-            Whatever you build, Projexia fits
+            Built for teams that work with clients
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-muted-foreground text-lg">
-            Agencies of all types use Projexia to streamline operations and
-            impress clients.
+            Whether you&apos;re a solo freelancer or a growing agency, Projexia adapts to how you work.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          {agencyTypes.map((agency, i) => (
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+          {personas.map((persona, i) => (
             <motion.div
-              key={agency.type}
+              key={persona.type}
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className={`rounded-xl border p-6 sm:p-8 ${agency.color}`}
+              className={`rounded-xl border p-6 sm:p-8 ${persona.color}`}
             >
-              <div className="flex items-start gap-4">
-                <div
-                  className={`shrink-0 size-10 rounded-xl bg-white border border-border flex items-center justify-center`}
-                >
-                  <agency.icon className={`size-5 ${agency.iconColor}`} />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="text-lg font-semibold text-foreground">
-                    {agency.type}
-                  </h3>
-                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                    {agency.description}
-                  </p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {agency.features.map((feature) => (
-                      <span
-                        key={feature}
-                        className={`inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium ${agency.badgeColor}`}
-                      >
-                        {feature}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+              <div className="shrink-0 size-10 rounded-xl bg-white border border-border flex items-center justify-center mb-4">
+                <persona.icon className={`size-5 ${persona.iconColor}`} />
+              </div>
+              <h3 className="text-lg font-semibold text-foreground">
+                {persona.type}
+              </h3>
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                {persona.description}
+              </p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {persona.features.map((feature) => (
+                  <span
+                    key={feature}
+                    className={`inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium ${persona.badgeColor}`}
+                  >
+                    {feature}
+                  </span>
+                ))}
               </div>
             </motion.div>
           ))}
@@ -120,14 +102,14 @@ export function BuiltForSection() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5, delay: 0.5 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
           className="mt-10 text-center"
         >
           <Link
             href="/register"
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
           >
-            Start free — works for every agency type
+            Start free — works for everyone
             <ArrowRight className="size-4" />
           </Link>
         </motion.div>

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms of Service — Projexia",
+  title: "Terms of Service",
   description: "Terms of Service for Projexia — the all-in-one project management platform for agencies.",
+  alternates: { canonical: "/terms" },
 };
 
 const lastUpdated = "March 12, 2026";

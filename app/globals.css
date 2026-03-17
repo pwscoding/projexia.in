@@ -119,3 +119,57 @@
     animation-play-state: paused;
   }
 }
+
+/* Micro-interactions */
+@layer utilities {
+  .hover-lift {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px -8px rgba(79, 70, 229, 0.15);
+  }
+
+  .cta-glow {
+    position: relative;
+  }
+
+  .cta-glow::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.3), rgba(124, 58, 237, 0.3));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+    filter: blur(8px);
+  }
+
+  .cta-glow:hover::after {
+    opacity: 1;
+  }
+}
+
+@keyframes subtle-pulse {
+  0%, 8%, 100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); }
+  4% { box-shadow: 0 0 0 5px rgba(79, 70, 229, 0.2); }
+}
+
+@layer utilities {
+  .cta-pulse {
+    animation: subtle-pulse 5s ease-in-out infinite;
+  }
+}
+
+@layer utilities {
+  .card-interactive {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .card-interactive:hover {
+    transform: scale(1.03);
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1);
+  }
+}

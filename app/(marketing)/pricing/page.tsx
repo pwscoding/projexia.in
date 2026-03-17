@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Pricing",
   description:
     "Simple, transparent pricing for Projexia. Start free and scale as you grow. No hidden fees.",
+  alternates: { canonical: "/pricing" },
 };
 
 export default function PricingPage() {

@@ -2,14 +2,15 @@
 
 import { Fragment, useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Check, X, Minus } from "lucide-react";
+import { Check, Minus } from "lucide-react";
 
 type CellValue = boolean | string;
 
 interface FeatureRow {
   name: string;
-  starter: CellValue;
-  professional: CellValue;
+  free: CellValue;
+  basic: CellValue;
+  pro: CellValue;
   enterprise: CellValue;
 }
 
@@ -22,40 +23,49 @@ const comparisonData: FeatureCategory[] = [
   {
     category: "Project Management",
     features: [
-      { name: "Projects", starter: "3", professional: "Unlimited", enterprise: "Unlimited" },
-      { name: "Kanban boards", starter: true, professional: true, enterprise: true },
-      { name: "Gantt timelines", starter: false, professional: true, enterprise: true },
-      { name: "Custom workflows", starter: false, professional: true, enterprise: true },
-      { name: "Milestones", starter: true, professional: true, enterprise: true },
+      { name: "Projects", free: "5", basic: "20", pro: "50", enterprise: "Unlimited" },
+      { name: "Kanban boards", free: true, basic: true, pro: true, enterprise: true },
+      { name: "Gantt timelines", free: false, basic: true, pro: true, enterprise: true },
+      { name: "Custom workflows", free: false, basic: false, pro: true, enterprise: true },
+      { name: "Milestones", free: true, basic: true, pro: true, enterprise: true },
     ],
   },
   {
     category: "Collaboration",
     features: [
-      { name: "Team members", starter: "2", professional: "15", enterprise: "Unlimited" },
-      { name: "Client portal", starter: "1 client", professional: "Unlimited", enterprise: "Unlimited" },
-      { name: "Real-time chat", starter: true, professional: true, enterprise: true },
-      { name: "File sharing", starter: true, professional: true, enterprise: true },
-      { name: "White-label branding", starter: false, professional: false, enterprise: true },
+      { name: "Team members", free: "5", basic: "15", pro: "50", enterprise: "Unlimited" },
+      { name: "Client portal", free: "1 client", basic: "Unlimited", pro: "Unlimited", enterprise: "Unlimited" },
+      { name: "Real-time chat", free: true, basic: true, pro: true, enterprise: true },
+      { name: "File sharing", free: true, basic: true, pro: true, enterprise: true },
+      { name: "White-label branding", free: false, basic: false, pro: false, enterprise: true },
     ],
   },
   {
     category: "Billing & Time",
     features: [
-      { name: "Time tracking", starter: false, professional: true, enterprise: true },
-      { name: "Invoicing", starter: false, professional: true, enterprise: true },
-      { name: "Billable hours reports", starter: false, professional: true, enterprise: true },
-      { name: "Payment integration", starter: false, professional: true, enterprise: true },
+      { name: "Time tracking", free: false, basic: true, pro: true, enterprise: true },
+      { name: "Invoicing", free: false, basic: true, pro: true, enterprise: true },
+      { name: "Billable hours reports", free: false, basic: false, pro: true, enterprise: true },
+      { name: "Payment integration", free: false, basic: true, pro: true, enterprise: true },
+    ],
+  },
+  {
+    category: "Analytics & Reports",
+    features: [
+      { name: "Basic dashboard", free: true, basic: true, pro: true, enterprise: true },
+      { name: "Advanced analytics", free: false, basic: false, pro: true, enterprise: true },
+      { name: "Custom reports", free: false, basic: false, pro: true, enterprise: true },
+      { name: "CSV exports", free: false, basic: true, pro: true, enterprise: true },
     ],
   },
   {
     category: "Security & Support",
     features: [
-      { name: "Storage", starter: "1 GB", professional: "10 GB", enterprise: "Unlimited" },
-      { name: "SSO", starter: false, professional: false, enterprise: true },
-      { name: "Audit logs", starter: false, professional: false, enterprise: true },
-      { name: "Support", starter: "Community", professional: "Priority", enterprise: "Dedicated" },
-      { name: "Custom integrations", starter: false, professional: false, enterprise: true },
+      { name: "Storage", free: "1 GB", basic: "10 GB", pro: "50 GB", enterprise: "Unlimited" },
+      { name: "SSO", free: false, basic: false, pro: false, enterprise: true },
+      { name: "Audit logs", free: false, basic: false, pro: false, enterprise: true },
+      { name: "Support", free: "Community", basic: "Email", pro: "Priority", enterprise: "Dedicated" },
+      { name: "Custom integrations", free: false, basic: false, pro: false, enterprise: true },
     ],
   },
 ];
@@ -77,7 +87,7 @@ export function FeatureComparison() {
 
   return (
     <section ref={ref} className="section-padding">
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -96,20 +106,22 @@ export function FeatureComparison() {
           className="rounded-xl border border-border bg-white overflow-hidden"
         >
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[600px]">
-              {/* Header */}
+            <table className="w-full min-w-[700px]">
               <thead>
                 <tr className="border-b border-border bg-muted/30">
-                  <th className="text-left text-sm font-medium text-muted-foreground p-4 w-[40%]">
+                  <th className="text-left text-sm font-medium text-muted-foreground p-4 w-[28%]">
                     Feature
                   </th>
-                  <th className="text-center text-sm font-medium text-muted-foreground p-4 w-[20%]">
-                    Starter
+                  <th className="text-center text-sm font-medium text-muted-foreground p-4 w-[18%]">
+                    Free
                   </th>
-                  <th className="text-center text-sm font-medium text-primary p-4 w-[20%] bg-primary/5">
-                    Professional
+                  <th className="text-center text-sm font-medium text-muted-foreground p-4 w-[18%]">
+                    Basic
                   </th>
-                  <th className="text-center text-sm font-medium text-muted-foreground p-4 w-[20%]">
+                  <th className="text-center text-sm font-medium text-primary p-4 w-[18%] bg-primary/5">
+                    Pro
+                  </th>
+                  <th className="text-center text-sm font-medium text-muted-foreground p-4 w-[18%]">
                     Enterprise
                   </th>
                 </tr>
@@ -119,7 +131,7 @@ export function FeatureComparison() {
                   <Fragment key={group.category}>
                     <tr className="border-b border-border bg-muted/20">
                       <td
-                        colSpan={4}
+                        colSpan={5}
                         className="text-xs font-semibold text-muted-foreground uppercase tracking-wider p-3 px-4"
                       >
                         {group.category}
@@ -129,10 +141,13 @@ export function FeatureComparison() {
                       <tr key={feature.name} className="border-b border-border last:border-b-0">
                         <td className="text-xs sm:text-sm text-foreground p-2 px-3 sm:p-3 sm:px-4">{feature.name}</td>
                         <td className="text-center p-3">
-                          <CellContent value={feature.starter} />
+                          <CellContent value={feature.free} />
+                        </td>
+                        <td className="text-center p-3">
+                          <CellContent value={feature.basic} />
                         </td>
                         <td className="text-center p-3 bg-primary/[0.02]">
-                          <CellContent value={feature.professional} />
+                          <CellContent value={feature.pro} />
                         </td>
                         <td className="text-center p-3">
                           <CellContent value={feature.enterprise} />
