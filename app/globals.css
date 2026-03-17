@@ -97,12 +97,25 @@
   100% { transform: translateX(-50%); }
 }
 
+@keyframes ticker-scroll-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
 @layer utilities {
   .ticker-track {
-    animation: ticker-scroll 30s linear infinite;
+    animation: ticker-scroll 40s linear infinite;
   }
 
   .ticker-track:hover {
+    animation-play-state: paused;
+  }
+
+  .ticker-track-reverse {
+    animation: ticker-scroll-reverse 40s linear infinite;
+  }
+
+  .ticker-track-reverse:hover {
     animation-play-state: paused;
   }
 }
