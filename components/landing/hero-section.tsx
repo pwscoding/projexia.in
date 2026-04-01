@@ -199,10 +199,9 @@ export function HeroSection() {
           transition={{ duration: 0.5 }}
           className="text-[2rem] sm:text-[2.75rem] md:text-[3.25rem] lg:text-[3.75rem] font-bold tracking-[-0.025em] leading-[1.1] text-slate-900"
         >
-          The all-in-one platform{" "}
+          Manage projects, delight clients{" "}
           <br className="hidden sm:block" />
-          for{" "}
-          <span className="text-indigo-600">client-facing teams</span>
+          — <span className="text-indigo-600">one dashboard</span>
         </motion.h1>
 
         {/* Subheadline — problem it solves */}
@@ -212,8 +211,8 @@ export function HeroSection() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mt-6 max-w-[38rem] mx-auto text-base sm:text-lg text-slate-500 leading-relaxed"
         >
-          Stop juggling 10 different tools. Projexia brings project management,
-          client portals, invoicing, and team collaboration into one place.
+          Stop juggling scattered tools. Projexia gives your agency project
+          management, client portals, invoicing, and team collaboration in one place.
         </motion.p>
 
         {/* CTA */}
@@ -229,7 +228,7 @@ export function HeroSection() {
             className="h-12 rounded-full px-8 text-sm font-semibold shadow-lg shadow-indigo-500/20 hover:shadow-xl hover:shadow-indigo-500/25 transition-all cta-glow"
           >
             <Link href="/register">
-              Start for free
+              Create your client portal
               <ArrowRight className="ml-2 size-4" />
             </Link>
           </Button>

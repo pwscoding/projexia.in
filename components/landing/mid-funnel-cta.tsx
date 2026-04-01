@@ -20,10 +20,10 @@ export function MidFunnelCTA() {
           className="rounded-2xl border border-primary/20 bg-primary/[0.03] p-8 sm:p-12 text-center"
         >
           <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
-            Stop juggling tools. Start delivering faster.
+            Replace your scattered toolkit with one platform
           </h2>
           <p className="mt-3 text-muted-foreground max-w-lg mx-auto">
-            Join 500+ agencies that replaced their tool stack with one platform.
+            Projects, clients, invoices, and team — managed from a single dashboard.
           </p>
 
           <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">

@@ -2,12 +2,12 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Users, Shield, Zap } from "lucide-react";
+import { IndianRupee, Clock, CreditCard } from "lucide-react";
 
-const stats = [
-  { icon: Users, value: "500+", label: "Agencies" },
-  { icon: Zap, value: "12K+", label: "Projects delivered" },
-  { icon: Shield, value: "99.9%", label: "Uptime" },
+const highlights = [
+  { icon: IndianRupee, label: "Free forever plan" },
+  { icon: Clock, label: "2 minute setup" },
+  { icon: CreditCard, label: "No credit card required" },
 ];
 
 export function TrustBar() {
@@ -24,14 +24,13 @@ export function TrustBar() {
           className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12"
         >
           <p className="text-sm text-muted-foreground font-medium">
-            Trusted by teams at
+            Built by an agency, for agencies
           </p>
           <div className="flex items-center gap-8 sm:gap-12">
-            {stats.map((stat) => (
-              <div key={stat.label} className="flex items-center gap-2 text-sm">
-                <stat.icon className="size-4 text-indigo-500" />
-                <span className="font-bold text-foreground">{stat.value}</span>
-                <span className="text-muted-foreground hidden sm:inline">{stat.label}</span>
+            {highlights.map((item) => (
+              <div key={item.label} className="flex items-center gap-2 text-sm">
+                <item.icon className="size-4 text-indigo-500" />
+                <span className="text-muted-foreground font-medium">{item.label}</span>
               </div>
             ))}
           </div>

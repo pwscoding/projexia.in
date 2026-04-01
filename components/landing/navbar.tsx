@@ -27,7 +27,7 @@ const features = [
 
 const resourceLinks = [
   { icon: BookOpen, label: "Documentation", href: "https://docs.projexia.in", external: true },
-  { icon: FileText, label: "Blog", href: "#", external: false },
+  { icon: FileText, label: "Blog", href: "/blog", external: false },
   { icon: Sparkles, label: "Changelog", href: "#", external: false },
 ];
 
@@ -307,7 +307,7 @@ export function Navbar() {
                 scrolled && "cta-pulse cta-glow"
               )}
             >
-              Start Free
+              Get Started Free
             </Link>
 
             {/* Mobile hamburger */}

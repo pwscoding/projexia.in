@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "/privacy", changeFrequency: "yearly" as const, priority: 0.3 },
     { url: "/terms", changeFrequency: "yearly" as const, priority: 0.3 },
     { url: "/cookies", changeFrequency: "yearly" as const, priority: 0.3 },
+    { url: "/blog", changeFrequency: "daily" as const, priority: 0.9 },
   ];
 
   const featureSlugs = [

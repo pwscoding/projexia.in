@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import { HeroSection } from "@/components/landing/hero-section";
 import { ProblemSection } from "@/components/landing/problem-section";
 import { SolutionSection } from "@/components/landing/solution-section";
+import { MidFunnelCTA } from "@/components/landing/mid-funnel-cta";
 import { HowItWorks } from "@/components/landing/how-it-works";
 import { BuiltForSection } from "@/components/landing/built-for-section";
-import { PricingTeaser } from "@/components/landing/pricing-teaser";
 import { ProductDemo } from "@/components/landing/product-demo";
+import { PricingTeaser } from "@/components/landing/pricing-teaser";
 import { TestimonialsSection } from "@/components/landing/testimonials-section";
 import { FAQSection } from "@/components/landing/faq-section";
 import { PageCTA } from "@/components/landing/page-cta";
@@ -14,14 +15,14 @@ import { SectionDivider } from "@/components/landing/section-divider";
 import { TrustBar } from "@/components/landing/trust-bar";
 
 export const metadata: Metadata = {
-  title: "Projexia – Project Management for Modern Agencies",
+  title: "Projexia – Manage Projects, Delight Clients",
   description:
-    "Manage projects, collaborate with clients, and deliver results faster. The all-in-one platform built for agencies that move fast.",
+    "Project management with built-in client portals. Manage projects, send invoices, share files, and collaborate with clients — all from one dashboard.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Projexia – Project Management for Modern Agencies",
+    title: "Projexia – Manage Projects, Delight Clients",
     description:
-      "Manage projects, collaborate with clients, and deliver results faster.",
+      "Project management with built-in client portals for agencies and freelancers.",
   },
 };
 
@@ -36,7 +37,7 @@ export default function Home() {
           url: "https://projexia.in",
           logo: "https://projexia.in/icon.png",
           description:
-            "All-in-one project management platform for modern agencies.",
+            "Project management with built-in client portals for agencies and freelancers.",
           sameAs: [],
         }}
       />
@@ -49,7 +50,7 @@ export default function Home() {
           operatingSystem: "Web",
           url: "https://projexia.in",
           description:
-            "Manage projects, collaborate with clients, and deliver results faster.",
+            "Project management with built-in client portals. Manage projects, send invoices, and collaborate with clients from one dashboard.",
           offers: {
             "@type": "Offer",
             price: "0",
@@ -127,6 +128,9 @@ export default function Home() {
 
       {/* Solution — key features */}
       <SolutionSection />
+
+      {/* Mid-funnel CTA — capture high-intent visitors early */}
+      <MidFunnelCTA />
       <SectionDivider />
 
       {/* How It Works — 3 steps */}
@@ -137,15 +141,15 @@ export default function Home() {
       <BuiltForSection />
       <SectionDivider />
 
+      {/* Product Demo — show value before price */}
+      <ProductDemo />
+      <SectionDivider />
+
       {/* Pricing Preview */}
       <PricingTeaser />
       <SectionDivider />
 
-      {/* Product Demo — video + UI previews */}
-      <ProductDemo />
-      <SectionDivider />
-
-      {/* Social Proof — testimonials */}
+      {/* Why Projexia — differentiators */}
       <TestimonialsSection showLink />
       <SectionDivider />
 
@@ -154,9 +158,9 @@ export default function Home() {
 
       {/* Final CTA */}
       <PageCTA
-        headline="Ready to run your agency from one place?"
-        description="Join 500+ agencies using Projexia to manage projects, delight clients, and grow faster."
-        primaryLabel="Start for Free"
+        headline="Your agency's chaos ends here."
+        description="Free plan, 2-minute setup, no credit card. Try Projexia and see the difference."
+        primaryLabel="Create Your Portal"
         primaryHref="/register"
         secondaryLabel="View Pricing"
         secondaryHref="/pricing"
