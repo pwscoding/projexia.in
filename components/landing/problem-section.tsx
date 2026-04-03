@@ -38,7 +38,7 @@ export function ProblemSection() {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-sm font-semibold text-red-500 uppercase tracking-wider mb-3">
+            <p className="text-sm font-semibold text-[var(--brand-coral)] uppercase tracking-wider mb-3">
               Sound familiar?
             </p>
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground leading-tight">
@@ -58,7 +58,7 @@ export function ProblemSection() {
                   className="flex items-start gap-3"
                 >
                   <div className="shrink-0 mt-0.5 size-8 rounded-lg bg-red-50 border border-red-100 flex items-center justify-center">
-                    <problem.icon className="size-4 text-red-500" />
+                    <problem.icon className="size-4 text-[var(--brand-coral)]" />
                   </div>
                   <p className="text-sm text-foreground font-medium leading-relaxed pt-1">
                     {problem.text}

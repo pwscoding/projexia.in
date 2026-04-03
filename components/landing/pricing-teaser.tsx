@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, Check } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { apiGet, type Plan } from "@/lib/api";
 
@@ -128,6 +129,18 @@ export function PricingTeaser() {
                     <span className="text-muted-foreground">{formatStorage(plan.storageLimitBytes)} storage</span>
                   </div>
                 </div>
+                <Button
+                  asChild
+                  className={`mt-5 w-full h-10 text-sm font-semibold ${
+                    isPopular
+                      ? "bg-primary text-white hover:bg-primary/90 shadow-md shadow-primary/20"
+                      : "bg-white text-foreground border border-border hover:bg-muted/50"
+                  }`}
+                >
+                  <Link href="/register">
+                    {plan.priceMonthly === 0 ? "Start Free" : plan.trialDays > 0 ? `Start ${plan.trialDays}-Day Trial` : "Get Started"}
+                  </Link>
+                </Button>
               </div>
             );
           })}

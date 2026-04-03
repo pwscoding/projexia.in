@@ -20,10 +20,10 @@ export function MidFunnelCTA() {
           className="rounded-2xl border border-primary/20 bg-primary/[0.03] p-8 sm:p-12 text-center"
         >
           <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
-            Replace your scattered toolkit with one platform
+            Stop losing billable hours to tool-switching
           </h2>
           <p className="mt-3 text-muted-foreground max-w-lg mx-auto">
-            Projects, clients, invoices, and team — managed from a single dashboard.
+            Agencies waste 5+ hours every week jumping between project management, invoicing, and client communication tools. Projexia brings it all together.
           </p>
 
           <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">

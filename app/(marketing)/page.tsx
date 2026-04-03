@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { HeroSection } from "@/components/landing/hero-section";
 import { ProblemSection } from "@/components/landing/problem-section";
 import { SolutionSection } from "@/components/landing/solution-section";
+import { FeatureGrid } from "@/components/landing/feature-grid";
 import { MidFunnelCTA } from "@/components/landing/mid-funnel-cta";
 import { HowItWorks } from "@/components/landing/how-it-works";
 import { BuiltForSection } from "@/components/landing/built-for-section";
@@ -15,14 +16,14 @@ import { SectionDivider } from "@/components/landing/section-divider";
 import { TrustBar } from "@/components/landing/trust-bar";
 
 export const metadata: Metadata = {
-  title: "Projexia – Manage Projects, Delight Clients",
+  title: "Projexia – The Only PM Tool with Built-in Client Portals",
   description:
-    "Project management with built-in client portals. Manage projects, send invoices, share files, and collaborate with clients — all from one dashboard.",
+    "Project management with built-in client portals. Manage projects, send invoices, share files, and collaborate with clients — all from one dashboard. Free forever plan.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Projexia – Manage Projects, Delight Clients",
+    title: "Projexia – The Only PM Tool with Built-in Client Portals",
     description:
-      "Project management with built-in client portals for agencies and freelancers.",
+      "Project management with built-in client portals for agencies and freelancers. Free forever plan, 2-minute setup.",
   },
 };
 
@@ -128,6 +129,10 @@ export default function Home() {
 
       {/* Solution — key features */}
       <SolutionSection />
+      <SectionDivider />
+
+      {/* Feature Grid — ClickUp-style all-features showcase */}
+      <FeatureGrid />
 
       {/* Mid-funnel CTA — capture high-intent visitors early */}
       <MidFunnelCTA />
@@ -158,11 +163,11 @@ export default function Home() {
 
       {/* Final CTA */}
       <PageCTA
-        headline="Your agency's chaos ends here."
-        description="Free plan, 2-minute setup, no credit card. Try Projexia and see the difference."
-        primaryLabel="Create Your Portal"
+        headline="Ready in 2 minutes. Free forever."
+        description="No credit card, no sales calls, no onboarding sessions. Just sign up and start managing projects the way your clients actually want."
+        primaryLabel="Start Free Now"
         primaryHref="/register"
-        secondaryLabel="View Pricing"
+        secondaryLabel="Compare Plans"
         secondaryHref="/pricing"
       />
     </main>

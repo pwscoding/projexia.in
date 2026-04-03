@@ -303,11 +303,11 @@ export function Navbar() {
             <Link
               href="/register"
               className={cn(
-                "inline-flex items-center h-9 px-5 rounded-full bg-indigo-600 text-white text-sm font-semibold shadow-sm shadow-indigo-500/20 hover:bg-indigo-700 transition-all",
+                "inline-flex items-center h-9 px-5 rounded-full bg-[var(--brand-indigo)] text-white text-sm font-semibold shadow-sm shadow-[rgba(99,102,241,0.2)] hover:brightness-110 transition-all",
                 scrolled && "cta-pulse cta-glow"
               )}
             >
-              Get Started Free
+              Start Free
             </Link>
 
             {/* Mobile hamburger */}

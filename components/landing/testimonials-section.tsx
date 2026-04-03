@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { ArrowRight, Rocket, Shield, Zap, Heart } from "lucide-react";
+import { ArrowRight, Rocket, Shield, Zap, Heart, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -31,6 +31,16 @@ const reasons = [
     description:
       "Start with a generous free plan. No trial countdown, no credit card required. Upgrade only when you need more.",
   },
+];
+
+const comparisons = [
+  { feature: "Built-in client portal", projexia: true, others: false },
+  { feature: "White-label branding", projexia: true, others: false },
+  { feature: "Invoicing & payments", projexia: true, others: false },
+  { feature: "Approval workflows", projexia: true, others: false },
+  { feature: "Time tracking", projexia: true, others: true },
+  { feature: "Task management", projexia: true, others: true },
+  { feature: "Free forever plan", projexia: true, others: false },
 ];
 
 export function TestimonialsSection({ showLink = false }: { showLink?: boolean }) {
@@ -79,11 +89,56 @@ export function TestimonialsSection({ showLink = false }: { showLink?: boolean }
           ))}
         </div>
 
+        {/* Comparison table — Projexia vs generic PM tools */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="mt-14"
+        >
+          <h3 className="text-xl font-semibold text-foreground text-center mb-6">
+            Projexia vs. generic PM tools
+          </h3>
+          <div className="rounded-xl border border-border bg-white overflow-hidden">
+            <div className="grid grid-cols-3 text-sm font-semibold border-b border-border bg-muted/40">
+              <div className="px-4 sm:px-6 py-3 text-muted-foreground">Feature</div>
+              <div className="px-4 sm:px-6 py-3 text-center text-primary">Projexia</div>
+              <div className="px-4 sm:px-6 py-3 text-center text-muted-foreground">Asana, Monday, etc.</div>
+            </div>
+            {comparisons.map((row, i) => (
+              <div
+                key={row.feature}
+                className={`grid grid-cols-3 text-sm ${
+                  i < comparisons.length - 1 ? "border-b border-border" : ""
+                }`}
+              >
+                <div className="px-4 sm:px-6 py-3 text-foreground font-medium">
+                  {row.feature}
+                </div>
+                <div className="px-4 sm:px-6 py-3 flex justify-center">
+                  {row.projexia ? (
+                    <span className="size-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-xs font-bold">&#10003;</span>
+                  ) : (
+                    <X className="size-4 text-slate-300" />
+                  )}
+                </div>
+                <div className="px-4 sm:px-6 py-3 flex justify-center">
+                  {row.others ? (
+                    <span className="size-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-xs font-bold">&#10003;</span>
+                  ) : (
+                    <span className="text-xs text-slate-400 font-medium">Paid add-on / missing</span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
         {showLink && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.5, delay: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
             className="mt-10 text-center"
           >
             <Button asChild variant="outline" size="lg" className="h-11 px-6 rounded-full">

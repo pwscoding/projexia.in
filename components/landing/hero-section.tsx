@@ -188,7 +188,7 @@ export function HeroSection() {
     <section ref={ref} className="relative overflow-hidden pt-28 pb-20 sm:pb-28">
       {/* Subtle background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full bg-indigo-50/80 blur-[100px]" />
+        <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full blur-[100px]" style={{ background: "radial-gradient(ellipse at center, rgba(99,102,241,0.12), rgba(167,139,250,0.08), rgba(249,112,102,0.05))" }} />
       </div>
 
       <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 text-center">
@@ -199,9 +199,9 @@ export function HeroSection() {
           transition={{ duration: 0.5 }}
           className="text-[2rem] sm:text-[2.75rem] md:text-[3.25rem] lg:text-[3.75rem] font-bold tracking-[-0.025em] leading-[1.1] text-slate-900"
         >
-          Manage projects, delight clients{" "}
+          The only PM tool with{" "}
           <br className="hidden sm:block" />
-          — <span className="text-indigo-600">one dashboard</span>
+          <span className="gradient-text-full">built-in client portals</span>
         </motion.h1>
 
         {/* Subheadline — problem it solves */}
@@ -211,8 +211,8 @@ export function HeroSection() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mt-6 max-w-[38rem] mx-auto text-base sm:text-lg text-slate-500 leading-relaxed"
         >
-          Stop juggling scattered tools. Projexia gives your agency project
-          management, client portals, invoicing, and team collaboration in one place.
+          Stop sending status update emails. Give every client a branded portal
+          to track progress, approve work, and pay invoices — while you manage everything from one dashboard.
         </motion.p>
 
         {/* CTA */}
@@ -225,10 +225,10 @@ export function HeroSection() {
           <Button
             asChild
             size="lg"
-            className="h-12 rounded-full px-8 text-sm font-semibold shadow-lg shadow-indigo-500/20 hover:shadow-xl hover:shadow-indigo-500/25 transition-all cta-glow"
+            className="h-12 rounded-full px-8 text-sm font-semibold shadow-lg shadow-[rgba(99,102,241,0.25)] hover:shadow-xl hover:shadow-[rgba(99,102,241,0.3)] transition-all cta-glow"
           >
             <Link href="/register">
-              Create your client portal
+              Start Free — No Credit Card
               <ArrowRight className="ml-2 size-4" />
             </Link>
           </Button>
@@ -265,7 +265,7 @@ export function HeroSection() {
         transition={{ duration: 0.7, delay: 0.3 }}
         className="relative z-10 mt-16 mx-auto max-w-5xl px-4 sm:px-6"
       >
-        <div className="absolute inset-x-8 -top-4 bottom-0 bg-gradient-to-b from-indigo-100/40 via-indigo-50/20 to-transparent rounded-3xl blur-2xl -z-10" />
+        <div className="absolute inset-x-8 -top-4 bottom-0 rounded-3xl blur-2xl -z-10" style={{ background: "linear-gradient(to bottom, rgba(99,102,241,0.15), rgba(167,139,250,0.08), transparent)" }} />
         <DashboardMockup />
       </motion.div>
     </section>

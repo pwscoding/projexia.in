@@ -15,32 +15,32 @@ const features = [
     title: "Cut 90% of status emails with Client Portals",
     description:
       "Give every client a branded portal to view progress, approve deliverables, and pay invoices — without a single status email.",
-    color: "bg-blue-50 border-blue-100",
-    iconColor: "text-blue-600",
+    color: "bg-indigo-50/80 border-indigo-100",
+    iconColor: "text-[var(--brand-indigo)]",
   },
   {
     icon: FolderOpen,
     title: "Never lose a file again",
     description:
       "One place for all project files. Upload, organize by project, and share with clients. No more digging through email attachments.",
-    color: "bg-amber-50 border-amber-100",
-    iconColor: "text-amber-600",
+    color: "bg-violet-50/80 border-violet-100",
+    iconColor: "text-[var(--brand-violet)]",
   },
   {
     icon: Clock,
     title: "Turn tracked hours into revenue automatically",
     description:
       "Track billable hours, monitor project progress, hit milestones on time, and turn tracked time into invoices automatically.",
-    color: "bg-green-50 border-green-100",
-    iconColor: "text-green-600",
+    color: "bg-red-50/80 border-red-100",
+    iconColor: "text-[var(--brand-coral)]",
   },
   {
     icon: Users,
     title: "Give every team member clarity, not confusion",
     description:
       "Assign tasks, manage roles, and give your team their own focused workspace. Everyone knows what to do and when.",
-    color: "bg-purple-50 border-purple-100",
-    iconColor: "text-purple-600",
+    color: "bg-indigo-50/80 border-indigo-100",
+    iconColor: "text-[var(--brand-indigo)]",
   },
 ];
 
