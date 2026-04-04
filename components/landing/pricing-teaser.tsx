@@ -85,6 +85,10 @@ export function PricingTeaser() {
           <p className="mt-4 text-muted-foreground text-lg">
             Start free, upgrade when you&apos;re ready.
           </p>
+          <div className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-3 py-1.5 text-xs font-medium text-amber-800">
+            <span className="size-1.5 rounded-full bg-amber-500 animate-pulse" />
+            Beta pricing — these rates won&apos;t last
+          </div>
         </motion.div>
 
         <motion.div

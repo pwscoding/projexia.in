@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
-import { Check, Shield, Users, HardDrive, Folder } from "lucide-react";
+import { Check, Shield, Users, HardDrive, Folder, Clock, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { apiGet, type Plan } from "@/lib/api";
 import Link from "next/link";
@@ -25,7 +25,6 @@ function formatStorage(bytes: string): string {
 export function PricingSection() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
-  const [isAnnual, setIsAnnual] = useState(false);
   const [plans, setPlans] = useState<(Plan & { features?: string[] })[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -60,38 +59,22 @@ export function PricingSection() {
             Start free and scale as you grow. No hidden fees, cancel anytime.
           </p>
 
-          {/* Segmented toggle */}
-          <div className="mt-8 flex items-center justify-center">
-            <div className="inline-flex items-center rounded-full border border-slate-200 bg-slate-100 p-1">
-              <button
-                onClick={() => setIsAnnual(true)}
-                className={cn(
-                  "rounded-full px-5 py-2 text-sm font-medium transition-all",
-                  isAnnual
-                    ? "bg-white text-foreground shadow-sm"
-                    : "text-muted-foreground hover:text-foreground"
-                )}
-              >
-                Annual pricing
-              </button>
-              <button
-                onClick={() => setIsAnnual(false)}
-                className={cn(
-                  "rounded-full px-5 py-2 text-sm font-medium transition-all",
-                  !isAnnual
-                    ? "bg-white text-foreground shadow-sm"
-                    : "text-muted-foreground hover:text-foreground"
-                )}
-              >
-                Monthly pricing
-              </button>
-            </div>
-          </div>
+          {/* Urgency banner */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={inView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.4, delay: 0.2 }}
+            className="mt-6 inline-flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-4 py-2 text-sm"
+          >
+            <Zap className="size-4 text-amber-600" />
+            <span className="font-semibold text-amber-800">Beta launch offer</span>
+            <span className="text-amber-700">— Lock in these prices before they increase</span>
+          </motion.div>
         </motion.div>
 
         {/* Loading skeleton */}
         {loading && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-12">
             {[0, 1, 2, 3].map((i) => (
               <div key={i} className="rounded-2xl border border-slate-200 bg-white p-6 animate-pulse">
                 <div className="space-y-4">
@@ -113,13 +96,13 @@ export function PricingSection() {
         {/* Pricing cards */}
         {!loading && plans.length > 0 && (
           <div className={cn(
-            "grid grid-cols-1 sm:grid-cols-2 gap-5 items-start",
+            "grid grid-cols-1 sm:grid-cols-2 gap-5 items-start mt-12",
             plans.length === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4"
           )}>
             {plans.map((plan, i) => {
               const isPopular = plan.slug === popularSlug;
               const isEnterprise = plan.slug === "enterprise";
-              const price = isAnnual ? plan.priceAnnual : plan.priceMonthly;
+              const price = plan.priceMonthly;
               const features = plan.features || [];
 
               return (
@@ -147,8 +130,8 @@ export function PricingSection() {
                     {plan.description}
                   </p>
 
-                  {/* Price */}
-                  <div className="mt-6 mb-6">
+                  {/* Price — monthly only */}
+                  <div className="mt-6 mb-2">
                     {isEnterprise && price === 0 ? (
                       <span className="text-3xl font-bold text-foreground">Custom</span>
                     ) : (
@@ -158,14 +141,23 @@ export function PricingSection() {
                         </span>
                         {price > 0 && (
                           <span className="text-sm text-muted-foreground">
-                            per {isAnnual ? "year" : "month"}
+                            per month
                           </span>
                         )}
                       </div>
                     )}
                   </div>
 
-                  {/* CTA button — pill style */}
+                  {/* Urgency line for paid plans */}
+                  {price > 0 && (
+                    <div className="mb-4 flex items-center gap-1.5 text-xs text-amber-700">
+                      <Clock className="size-3.5" />
+                      <span>Beta price — increases after launch</span>
+                    </div>
+                  )}
+                  {price === 0 && <div className="mb-4" />}
+
+                  {/* CTA button */}
                   {isPopular ? (
                     <Link
                       href={`/register?plan=${plan.slug}`}
@@ -230,15 +222,20 @@ export function PricingSection() {
           </div>
         )}
 
-        {/* Money-back guarantee */}
+        {/* Bottom trust signals */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="mt-10 flex items-center justify-center gap-2 text-sm text-muted-foreground"
+          className="mt-10 flex flex-col items-center gap-3"
         >
-          <Shield className="size-4 text-green-600" />
-          {Math.max(...plans.map((p) => p.trialDays || 14))}-day money-back guarantee on all paid plans
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <Shield className="size-4 text-green-600" />
+            {Math.max(...plans.map((p) => p.trialDays || 14))}-day money-back guarantee on all paid plans
+          </div>
+          <p className="text-xs text-muted-foreground/70">
+            Prices are in INR. Billed monthly. No long-term contracts.
+          </p>
         </motion.div>
       </div>
     </section>
