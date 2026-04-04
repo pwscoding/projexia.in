@@ -78,7 +78,7 @@ export function Navbar() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
+    <header className="relative z-50">
       <nav
         className={cn(
           "transition-all duration-200 border-b",
