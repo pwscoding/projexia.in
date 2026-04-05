@@ -1,17 +1,10 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
-import { ArrowRight, Check } from "lucide-react";
+import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import logo from "@/assets/projexia-logo.png";
-
-const badges = [
-  "Free forever plan",
-  "2 min setup",
-  "No credit card",
-];
 
 function DashboardMockup() {
   return (
@@ -181,18 +174,28 @@ function DashboardMockup() {
 }
 
 export function HeroSection() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-50px" });
+  const sectionRef = useRef<HTMLElement>(null);
+  const dashboardRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(sectionRef, { once: true, margin: "-50px" });
+
+  const { scrollYProgress } = useScroll({
+    target: dashboardRef,
+    offset: ["start end", "center center"],
+  });
+
+  // Completes fully by the time image reaches viewport center
+  const rotateX = useTransform(scrollYProgress, [0, 1], [45, 0]);
+  const imgScale = useTransform(scrollYProgress, [0, 1], [0.6, 1.1]);
+  const smoothRotateX = useSpring(rotateX, { stiffness: 80, damping: 30 });
+  const smoothScale = useSpring(imgScale, { stiffness: 80, damping: 30 });
 
   return (
-    <section ref={ref} className="relative overflow-hidden pt-28 pb-20 sm:pb-28">
-      {/* Subtle background */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full blur-[100px]" style={{ background: "radial-gradient(ellipse at center, rgba(99,102,241,0.12), rgba(167,139,250,0.08), rgba(249,112,102,0.05))" }} />
-      </div>
+    <section ref={sectionRef} className="relative overflow-hidden pt-28 pb-20 sm:pb-28">
+      {/* Subtle sky gradient background — like Dreelio */}
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-sky-100/70 via-sky-50/40 to-white" />
 
-      <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 text-center">
-        {/* Headline — what it is + who it's for */}
+      <div className="relative z-10 mx-auto pt-10 max-w-4xl px-4 sm:px-6 text-center">
+        {/* Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -204,7 +207,7 @@ export function HeroSection() {
           <span className="gradient-text-full">built-in client portals</span>
         </motion.h1>
 
-        {/* Subheadline — problem it solves */}
+        {/* Subheadline */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -215,7 +218,7 @@ export function HeroSection() {
           to track progress, approve work, and pay invoices — while you manage everything from one dashboard.
         </motion.p>
 
-        {/* CTA */}
+        {/* CTA buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -225,48 +228,43 @@ export function HeroSection() {
           <Button
             asChild
             size="lg"
-            className="h-12 rounded-full px-8 text-sm font-semibold shadow-lg shadow-[rgba(99,102,241,0.25)] hover:shadow-xl hover:shadow-[rgba(99,102,241,0.3)] transition-all cta-glow"
+            className="h-12 rounded-full px-8 text-sm font-semibold bg-slate-900 hover:bg-slate-800 shadow-lg shadow-slate-900/10"
           >
-            <Link href="/register">
-              Start Free — No Credit Card
-              <ArrowRight className="ml-2 size-4" />
-            </Link>
+            <Link href="/register">Try Projexia Free</Link>
           </Button>
           <Button
             asChild
             variant="outline"
             size="lg"
-            className="h-12 rounded-full px-8 text-sm font-semibold border-slate-200 hover:bg-slate-50"
+            className="h-12 rounded-full px-8 text-sm font-semibold border-slate-300 text-slate-700 hover:bg-slate-50"
           >
-            <Link href="#demo">See it in action</Link>
+            <Link href="/features">See Features</Link>
           </Button>
-        </motion.div>
-
-        {/* Trust badges */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.4, delay: 0.35 }}
-          className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[13px] text-slate-400"
-        >
-          {badges.map((badge) => (
-            <span key={badge} className="inline-flex items-center gap-1.5">
-              <Check className="size-3.5 text-emerald-500" />
-              {badge}
-            </span>
-          ))}
         </motion.div>
       </div>
 
-      {/* Product screenshot */}
+      {/* Dashboard with 3D perspective on scroll */}
       <motion.div
-        initial={{ opacity: 0, y: 50 }}
+        ref={dashboardRef}
+        initial={{ opacity: 0, y: 40 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.7, delay: 0.3 }}
-        className="relative z-10 mt-16 mx-auto max-w-5xl px-4 sm:px-6"
+        className="relative z-10 mt-0 mx-auto max-w-7xl px-4 sm:px-6"
+        style={{ perspective: 1200 }}
       >
-        <div className="absolute inset-x-8 -top-4 bottom-0 rounded-3xl blur-2xl -z-10" style={{ background: "linear-gradient(to bottom, rgba(99,102,241,0.15), rgba(167,139,250,0.08), transparent)" }} />
-        <DashboardMockup />
+        <motion.div
+          style={{
+            rotateX: smoothRotateX,
+            scale: smoothScale,
+            transformOrigin: "50% 100%",
+          }}
+        >
+          <img
+            src="/images/dashboard.jpg"
+            alt="Projexia Dashboard"
+            className="w-full rounded-2xl border border-slate-200/60 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.25)] ring-1 ring-slate-900/5"
+          />
+        </motion.div>
       </motion.div>
     </section>
   );
