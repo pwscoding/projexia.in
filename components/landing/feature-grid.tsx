@@ -188,14 +188,15 @@ export function FeatureGrid() {
           className="section-header"
         >
           <p className="text-sm font-semibold text-[var(--brand-indigo)] uppercase tracking-wider mb-3">
-            Everything you need
+            And everything else you were juggling
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
-            All your tools,{" "}
-            <span className="gradient-text-full">one platform</span>
+            All of it,{" "}
+            <span className="gradient-text-full">in one calm place</span>
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-muted-foreground text-lg">
-            Replace your scattered stack with a single platform built for agencies, freelancers, and client-facing teams.
+            The scattered stack you&apos;ve been holding together by hand — projects,
+            files, invoices, time, chat — finally under one roof.
           </p>
         </motion.div>
 

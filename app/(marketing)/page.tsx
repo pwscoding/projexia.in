@@ -4,7 +4,6 @@ import { ProblemSection } from "@/components/landing/problem-section";
 import { SolutionSection } from "@/components/landing/solution-section";
 import { FeatureGrid } from "@/components/landing/feature-grid";
 import { MidFunnelCTA } from "@/components/landing/mid-funnel-cta";
-import { HowItWorks } from "@/components/landing/how-it-works";
 import { BuiltForSection } from "@/components/landing/built-for-section";
 import { ProductDemo } from "@/components/landing/product-demo";
 import { PricingTeaser } from "@/components/landing/pricing-teaser";
@@ -14,6 +13,8 @@ import { PageCTA } from "@/components/landing/page-cta";
 import { JsonLd } from "@/components/landing/json-ld";
 import { SectionDivider } from "@/components/landing/section-divider";
 import { TrustBar } from "@/components/landing/trust-bar";
+import { SilentInboxSection } from "@/components/landing/silent-inbox-section";
+import { TheQuietSection } from "@/components/landing/the-quiet-section";
 
 export const metadata: Metadata = {
   title: "Projexia – The Only PM Tool with Built-in Client Portals",
@@ -116,41 +117,43 @@ export default function Home() {
           ],
         }}
       />
-      {/* Hero — headline, subheadline, CTA, product screenshot */}
+      {/* Beat 1 — Hero: cold open */}
       <HeroSection />
 
-      {/* Trust Bar — credibility strip */}
+      {/* Trust strip */}
       <TrustBar />
       <SectionDivider />
 
-      {/* Problem — pain points (AIDA: Interest) */}
+      {/* Beat 2 — Stakes: the chaos */}
       <ProblemSection />
+
+      {/* Beat 3 — Silent inbox: the emotional hook */}
+      <SilentInboxSection />
       <SectionDivider />
 
-      {/* Solution — key features */}
+      {/* Beat 4–5 — The Turn + relief features */}
       <SolutionSection />
       <SectionDivider />
 
-      {/* Feature Grid — ClickUp-style all-features showcase */}
+      {/* Beat 5 support — full feature showcase */}
       <FeatureGrid />
 
-      {/* Mid-funnel CTA — capture high-intent visitors early */}
-      <MidFunnelCTA />
-      <SectionDivider />
-
-      {/* How It Works — 3 steps */}
-      <HowItWorks />
-      <SectionDivider />
-
-      {/* Who Is It For — Agencies, Freelancers, Teams */}
-      <BuiltForSection />
-      <SectionDivider />
-
-      {/* Product Demo — show value before price */}
+      {/* Beat 5 support — demo: both sides */}
       <ProductDemo />
       <SectionDivider />
 
-      {/* Pricing Preview */}
+      {/* Mid-funnel CTA — capture high-intent visitors */}
+      <MidFunnelCTA />
+      <SectionDivider />
+
+      {/* Beat 6 — Payoff: identity shift */}
+      <BuiltForSection />
+
+      {/* Beat 7 — The Quiet: emotional close */}
+      <TheQuietSection />
+      <SectionDivider />
+
+      {/* Beat 8 — Pricing preview */}
       <PricingTeaser />
       <SectionDivider />
 
@@ -161,11 +164,11 @@ export default function Home() {
       {/* FAQ */}
       <FAQSection variant="general" />
 
-      {/* Final CTA */}
+      {/* Beat 9 — Final CTA */}
       <PageCTA
-        headline="Ready in 2 minutes. Free forever."
-        description="No credit card, no sales calls, no onboarding sessions. Just sign up and start managing projects the way your clients actually want."
-        primaryLabel="Start Free Now"
+        headline="Give your agency one week."
+        description="Start your free trial — no credit card, no sales calls. Just see how much lighter it feels."
+        primaryLabel="Start Free Trial — No Card Needed"
         primaryHref="/register"
         secondaryLabel="Compare Plans"
         secondaryHref="/pricing"

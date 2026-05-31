@@ -57,13 +57,14 @@ export function BuiltForSection() {
           className="section-header"
         >
           <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">
-            Who is it for
+            The payoff
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
-            Built for teams that work with clients
+            Same agency. Same you. It just looks premium now.
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-muted-foreground text-lg">
-            Whether you&apos;re a solo freelancer or a growing agency, Projexia adapts to how you work.
+            Behind the scenes, your team knows exactly what to do. Out front, your
+            client feels completely taken care of — whatever your size.
           </p>
         </motion.div>
 
@@ -109,7 +110,7 @@ export function BuiltForSection() {
             href="/register"
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
           >
-            Start free — works for everyone
+            Start your free trial — no card needed
             <ArrowRight className="size-4" />
           </Link>
         </motion.div>

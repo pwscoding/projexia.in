@@ -214,13 +214,14 @@ export function ProductDemo() {
           className="section-header"
         >
           <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">
-            See it in action
+            See both sides
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
-            Watch how Projexia works
+            What you manage. What your client sees.
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-muted-foreground text-lg">
-            A quick look at the platform — from your dashboard to what your clients see.
+            Your calm dashboard on one side. Their branded portal on the other.
+            Same project, no chasing in between.
           </p>
         </motion.div>
 

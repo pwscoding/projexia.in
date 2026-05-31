@@ -12,33 +12,33 @@ import {
 const features = [
   {
     icon: LayoutDashboard,
-    title: "Cut 90% of status emails with Client Portals",
+    title: "They just open the portal and see it",
     description:
-      "Give every client a branded portal to view progress, approve deliverables, and pay invoices — without a single status email.",
+      `The whole project — what’s done, what’s next, where it stands. No more "any update?", because the update is already there when they log in.`,
     color: "bg-indigo-50/80 border-indigo-100",
     iconColor: "text-[var(--brand-indigo)]",
   },
   {
-    icon: FolderOpen,
-    title: "Never lose a file again",
-    description:
-      "One place for all project files. Upload, organize by project, and share with clients. No more digging through email attachments.",
-    color: "bg-violet-50/80 border-violet-100",
-    iconColor: "text-[var(--brand-violet)]",
-  },
-  {
     icon: Clock,
-    title: "Turn tracked hours into revenue automatically",
+    title: "One click to approve. One click to pay.",
     description:
-      "Track billable hours, monitor project progress, hit milestones on time, and turn tracked time into invoices automatically.",
+      "Need sign-off? They approve right on the work. Need to get paid? They open the invoice and pay online, instantly. No more awkward follow-up emails.",
     color: "bg-red-50/80 border-red-100",
     iconColor: "text-[var(--brand-coral)]",
   },
   {
-    icon: Users,
-    title: "Give every team member clarity, not confusion",
+    icon: FolderOpen,
+    title: "Every file in one place, never lost in a thread",
     description:
-      "Assign tasks, manage roles, and give your team their own focused workspace. Everyone knows what to do and when.",
+      "Upload once, organized by project. Your client always knows where to look — and so do you. Nothing disappears into an email chain again.",
+    color: "bg-violet-50/80 border-violet-100",
+    iconColor: "text-[var(--brand-violet)]",
+  },
+  {
+    icon: Users,
+    title: "A monthly report that makes renewing obvious",
+    description:
+      `Instead of writing "here's what we did this month" at midnight, send a polished report. Clear proof of the value you delivered.`,
     color: "bg-indigo-50/80 border-indigo-100",
     iconColor: "text-[var(--brand-indigo)]",
   },
@@ -58,13 +58,14 @@ export function SolutionSection() {
           className="section-header"
         >
           <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">
-            The Solution
+            So let me show you something different
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
-            Everything your agency needs, in one place
+            One portal. Your name, your logo, your colors.
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-muted-foreground text-lg">
-            Replace your scattered stack with a single platform built for agencies, freelancers, and teams.
+            Your client logs in — and everything is right there. Here&apos;s what
+            that feels like, on both sides.
           </p>
         </motion.div>
 

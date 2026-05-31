@@ -8,19 +8,19 @@ import { ChaosVisual } from "./chaos-visual";
 const problems = [
   {
     icon: MessageSquareX,
-    text: "Clients keep asking for updates you already sent",
+    text: `A client messages at midnight: "any update?" — for work you finished days ago`,
   },
   {
     icon: FolderOpen,
-    text: "Files are scattered across email, Drive, and Slack",
+    text: "Files live in email, WhatsApp, Drive, and three different Slack threads",
   },
   {
     icon: Clock,
-    text: "Nobody knows how many billable hours were lost last week",
+    text: "The invoice you sent three weeks ago is still unpaid — and asking again feels awkward",
   },
   {
     icon: AlertTriangle,
-    text: "A deadline slipped and the client found out before you did",
+    text: "A deadline slipped, and the client noticed before you did",
   },
 ];
 
@@ -42,10 +42,12 @@ export function ProblemSection() {
               Sound familiar?
             </p>
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground leading-tight">
-              Running an agency shouldn&apos;t feel this hard
+              It was supposed to be your business.
+              <br className="hidden sm:block" /> It became a group chat.
             </h2>
             <p className="mt-4 text-muted-foreground text-lg">
-              Most agencies lose hours every week to scattered tools and disorganized workflows.
+              You didn&apos;t start an agency to spend your nights chasing updates,
+              files, and payments. But somewhere along the way, that became the job.
             </p>
 
             <div className="mt-8 space-y-4">

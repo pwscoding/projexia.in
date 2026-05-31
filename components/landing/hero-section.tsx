@@ -202,9 +202,9 @@ export function HeroSection() {
           transition={{ duration: 0.5 }}
           className="text-[2rem] sm:text-[2.75rem] md:text-[3.25rem] lg:text-[3.75rem] font-bold tracking-[-0.025em] leading-[1.1] text-slate-900"
         >
-          The only PM tool with{" "}
+          It&apos;s 11:43pm. And you&apos;re{" "}
           <br className="hidden sm:block" />
-          <span className="gradient-text-full">built-in client portals</span>
+          <span className="gradient-text-full">still answering a client.</span>
         </motion.h1>
 
         {/* Subheadline */}
@@ -214,8 +214,9 @@ export function HeroSection() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mt-6 max-w-[38rem] mx-auto text-base sm:text-lg text-slate-500 leading-relaxed"
         >
-          Stop sending status update emails. Give every client a branded portal
-          to track progress, approve work, and pay invoices — while you manage everything from one dashboard.
+          You started an agency to do great work — not to chase approvals, files,
+          and your own invoices. Projexia gives every client one branded portal,
+          so the work finally speaks for itself.
         </motion.p>
 
         {/* CTA buttons */}
@@ -230,7 +231,7 @@ export function HeroSection() {
             size="lg"
             className="h-12 rounded-full px-8 text-sm font-semibold bg-slate-900 hover:bg-slate-800 shadow-lg shadow-slate-900/10"
           >
-            <Link href="/register">Try Projexia Free</Link>
+            <Link href="/register">Start Free Trial — No Card Needed</Link>
           </Button>
           <Button
             asChild
@@ -238,7 +239,7 @@ export function HeroSection() {
             size="lg"
             className="h-12 rounded-full px-8 text-sm font-semibold border-slate-300 text-slate-700 hover:bg-slate-50"
           >
-            <Link href="/features">See Features</Link>
+            <Link href="#demo">See how it works</Link>
           </Button>
         </motion.div>
       </div>
