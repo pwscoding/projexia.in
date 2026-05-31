@@ -12,7 +12,7 @@ const previewTabs = [
 
 function DashboardPreview() {
   return (
-    <div className="rounded-xl border border-border bg-white shadow-lg overflow-hidden">
+    <div className="rounded-xl border border-border bg-white shadow-lg overflow-hidden h-full flex flex-col">
       <div className="flex items-center gap-2 px-4 py-2.5 bg-muted/50 border-b border-border">
         <div className="flex gap-1.5">
           <div className="size-2.5 rounded-full bg-red-400" />
@@ -25,7 +25,7 @@ function DashboardPreview() {
           </div>
         </div>
       </div>
-      <div className="flex">
+      <div className="flex flex-1 min-h-0">
         <div className="w-[140px] border-r border-border p-3 space-y-1 bg-muted/20 hidden sm:block">
           {["Dashboard", "Projects", "Clients", "Team", "Time", "Invoices"].map((item, i) => (
             <div key={item} className={`flex items-center gap-2 px-2 py-1.5 rounded text-[9px] ${i === 0 ? "bg-primary/10 text-primary font-medium" : "text-muted-foreground"}`}>
@@ -74,7 +74,7 @@ function DashboardPreview() {
 
 function ClientViewPreview() {
   return (
-    <div className="rounded-xl border border-border bg-white shadow-lg overflow-hidden">
+    <div className="rounded-xl border border-border bg-white shadow-lg overflow-hidden h-full flex flex-col">
       <div className="h-10 bg-indigo-600 flex items-center px-4 gap-2">
         <div className="size-5 rounded bg-white/20 flex items-center justify-center">
           <span className="text-[6px] font-bold text-white">YA</span>
@@ -86,7 +86,7 @@ function ClientViewPreview() {
           ))}
         </div>
       </div>
-      <div className="p-4 space-y-3">
+      <div className="p-4 space-y-3 flex-1">
         <div className="grid grid-cols-3 gap-2">
           {[
             { label: "Active Projects", val: "3" },
@@ -132,7 +132,7 @@ function ClientViewPreview() {
 
 function FileSystemPreview() {
   return (
-    <div className="rounded-xl border border-border bg-white shadow-lg overflow-hidden">
+    <div className="rounded-xl border border-border bg-white shadow-lg overflow-hidden h-full flex flex-col">
       <div className="flex items-center gap-2 px-4 py-2.5 bg-muted/50 border-b border-border">
         <div className="flex gap-1.5">
           <div className="size-2.5 rounded-full bg-red-400" />
@@ -145,7 +145,7 @@ function FileSystemPreview() {
           </div>
         </div>
       </div>
-      <div className="p-4 space-y-3">
+      <div className="p-4 space-y-3 flex-1">
         <div className="flex items-center justify-between">
           <div className="text-[10px] font-semibold text-foreground">Project Files</div>
           <div className="flex gap-2">
@@ -297,18 +297,33 @@ export function ProductDemo() {
             </div>
           </div>
 
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeTab}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3 }}
-              className="max-w-4xl mx-auto"
-            >
-              <PreviewComponent />
-            </motion.div>
-          </AnimatePresence>
+          {/* Laptop device frame */}
+          <div className="mx-auto max-w-4xl">
+            {/* screen */}
+            <div className="rounded-t-2xl border border-slate-700/80 bg-slate-900 p-2 sm:p-2.5 shadow-2xl shadow-slate-900/30">
+              <div className="overflow-hidden rounded-xl aspect-[16/10] bg-slate-100">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeTab}
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                    className="h-full"
+                  >
+                    <PreviewComponent />
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
+            {/* hinge / base */}
+            <div className="relative">
+              <div className="h-3.5 w-full rounded-b-xl border-x border-b border-slate-400/50 bg-gradient-to-b from-slate-300 to-slate-400" />
+              <div className="absolute left-1/2 top-0 h-1.5 w-24 -translate-x-1/2 rounded-b-lg bg-slate-400/70" />
+            </div>
+            {/* desk shadow */}
+            <div className="mx-auto mt-1 h-3 w-[68%] rounded-[50%] bg-slate-900/10 blur-md" />
+          </div>
         </motion.div>
       </div>
     </section>
